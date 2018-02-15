@@ -1,0 +1,79 @@
+p {
+color: #fff;
+}
+
+h2 {
+color: #fff;
+border-bottom: none;
+max-height: 38px;
+font-size: 2em;
+margin: 0 0 30px;
+}
+
+#login {
+background: linear-gradient(rgba(0, 97, 145, 0.65), rgba(0, 97, 145, 0.65)), url("https://delegacion.uc3m.es/taquillas/assets/img/back.jpg") center;
+text-align: center;
+border-collapse: separate;
+border-spacing: 0 80px;
+
+background-size: cover;
+box-sizing: border-box;
+display: table;
+width: 100%;
+}
+
+form {
+margin: 20px 0;
+}
+
+input {
+display: block;
+margin: 0 auto;
+width: 300px;
+padding: 12px 15px;
+background: rgba(255, 255, 255, 0.8);
+border: 1px solid #c4c4c4;
+box-sizing: border-box;
+outline: 0;
+font-family: 'Roboto', sans-serif;
+font-weight: 300;
+font-size: 100%;
+}
+
+input[type=password]{
+border-radius: 0 0 5px 5px;
+border-top: none;
+border-color: rgba(0,0,0,0.55);
+}
+
+input[type=text]{
+border-color: rgba(0,0,0,0.55);
+border-radius: 5px 5px 0 0;
+}
+
+button {
+width: 300px;
+box-sizing: border-box;
+padding: 12px 15px;
+text-shadow: -1px 0 4px rgba(0, 0, 0, 0.55);
+box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.45);
+border-radius: 5px;
+background: #066394;
+color: #fff;
+position: relative;
+text-decoration: none;
+border-width: 3px;
+border: none;
+border-bottom: 2px solid #004a6f;
+transition: all 0.4s;
+line-height: 1;
+font-weight: 400;
+margin: 30px auto 0;
+font-size: 100%;
+line-height: 1;
+font-weight: 400;
+}
+
+button:hover {
+cursor:pointer;
+}

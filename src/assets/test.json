@@ -1,0 +1,16 @@
+[
+    {"id": 1, "building": "Edificio 4", "zone": "Sin zonas", "floor": 1, "school": 1},
+    {"id": 2, "building": "Edificio 15", "zone": "Sin zonas", "floor": 0, "school": 1},
+    {"id": 3, "building": "Edificio 15", "zone": "Sin zonas", "floor": 1, "school": 1},
+    {"id": 4, "building": "Edificio 2", "zone": "C", "floor": 2, "school": 2},
+    {"id": 5, "building": "Edificio 2", "zone": "B", "floor": 3, "school": 2},
+    {"id": 6, "building": "Edificio 7", "zone": "J", "floor": 7, "school": 2},
+    {"id": 7, "building": "Edificio 4", "zone": "E", "floor": 1, "school": 2},
+    {"id": 8, "building": "Edificio 4", "zone": "E", "floor": 0, "school": 2},
+    {"id": 9, "building": "Edificio 2", "zone": "D", "floor": 1, "school": 2},
+    {"id": 10, "building": "Edificio 3", "zone": "A", "floor": 0, "school": 2},
+    {"id": 11, "building": "Edificio 11", "zone": "Sin zonas", "floor": 1, "school": 1},
+    {"id": 12, "building": "Edificio 7", "zone": "Sin zonas", "floor": 0, "school": 1},
+    {"id": 13, "building": "Edificio 1", "zone": "D", "floor": 1, "school": 2},
+    {"id": 14, "building": "Edificio 1", "zone": "H", "floor": 1, "school": 2}
+]

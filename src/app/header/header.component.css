@@ -1,0 +1,41 @@
+h1 {
+margin: 0;
+display: inline-block;
+vertical-align: middle;
+font-family: 'Roboto', sans-serif;
+font-size: 2.7em;
+
+}
+
+img {
+margin-left: 15px;
+display: inline-block;
+vertical-align: middle;
+}
+
+#login-button-div {
+float: right;
+margin-top: 15px;
+font-size: 0.95em;
+}
+
+#login-button {
+padding: 8px 23px;
+border-radius: 5px;
+border: 1px solid #bad5e2;
+color: #006191;
+transition: all 0.4s;
+}
+
+
+#login-button:hover, #login-button:focus {
+border: 1px solid #104f71;
+}
+
+#taquillas-header{
+  background: #ffffff;
+  width: 100%;
+  border-bottom: 1px solid #ccc;
+  padding: 13px 0;
+  margin: 0;
+}

@@ -1,0 +1,39 @@
+-Login: hacer que el login funcione (mediante baimen) y hacer que cambie el header cuando el usuario esté logeado.
+endpoint: /login
+
+-Reserva: hacer que funcione el PUT para poder reservar una taquilla.
+endpoint: /reserva
+
+-Admin y Manager homes: hacer que en vez de por ID las taquillas queden ordenadas por fecha.
+Hacer que funcione el botón de buscar.
+endpoint: /admin
+endpoint: /manager
+
+-Seleccionar taquilla (admin o manager): Hacer que funcione el GET para obtener el ID de una taquilla seleccionada y poder ejecutar acciones con ella (deberia redirigir a /admin/locker/{{id}} o /manager/locker/{{id}}).
+endpoint: /admin/select
+endpoint: /manager/select
+
+-Listar taquillas (manager): Hacer que funcione el POST para crear una nueva taquilla.
+endpoint: /manager/locker
+
+-Lugares (manager): Hacer que funcione POST
+Hacer que PUT y DELETE redirijan a /manager/place/{{id}} y allí se pueda borrar (un botón) y modificar (un form).
+Hacer que al seleccionar "Crear uno nuevo..." nos aparezca para escribirlo.
+endpoint: /manager/place
+
+-Tipos (manager): Hacer que funcione POST
+Hacer que PUT y DELETE redirijan a /manager/type/{{id}} y allí se pueda borrar (un botón) y modificar (un form).
+endpoint: /manager/type
+
+-Lockerview (manager): Hacer que funcionen PUT y DELETE.
+endpoint: /manager/type/{{id}}
+
+-Typeview (manager): Crear componente.
+Hacer la interfaz de usuario.
+endpoint: /manager/type/{{id}}
+
+-Placeview (manager): Crear componente.
+Hacer la interfaz de usuario.
+endpoint: /manager/place/{{id}}
+
+-General: Antes de lanzar a producción, cambiar los JSON y PDF locales (puestos para pruebas) por los de la API correspondiente (es cambiar una url) en todos los sitios donde haya comunicación con el servidor.

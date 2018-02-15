@@ -1,0 +1,61 @@
+#footer h2, #footer a {
+font-size: 1.5em;
+color: #066394;
+margin: 0;
+}
+
+#footer {
+padding: 15px 0 0 0;
+font-size: 0.9em;
+background: #fff;
+max-width: 960px;
+}
+
+#rrss {
+margin: 20px 0;
+text-align: center;
+}
+
+#rrss a {
+font-size: 100%;
+border-bottom: solid 1px #bad5e2;
+}
+
+.material-icons {
+font-size: 1.1em;
+}
+
+#footer i{
+margin: 0 5px 0 15px
+}
+
+#footer i, #footer a, #footer span{
+display: inline-block;
+vertical-align: top;
+}
+
+#footer span{
+max-width: 500px;
+text-align: left;
+}
+
+#copyright{
+border-top: 1px solid #e3e3e3;
+text-align: center;
+padding: 20px 0 35px 0;
+border: 0 0 1px 0 solid black;
+background: #fff;
+font-size: 0.9em;
+}
+
+
+#footer, #copyright{
+overflow:hidden;
+}
+
+#taquillas-footer{
+  background: #ffffff;
+  width: 100%;
+  margin: 0;
+  box-shadow: 0 0 6px 0 #2b2b2b;
+}
