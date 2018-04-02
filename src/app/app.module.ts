@@ -16,10 +16,11 @@ import { LockerselectorComponent } from './lockerselector/lockerselector.compone
 import { ManagerlockerlistComponent } from './managerlockerlist/managerlockerlist.component';
 import { LockerformComponent } from './lockerform/lockerform.component';
 import { HttpModule, JsonpModule } from '@angular/http';
-import {HttpClientModule} from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { TypeComponent } from './type/type.component';
 import { PlaceComponent } from './place/place.component';
 import { LockerviewComponent } from './lockerview/lockerview.component';
+import { AuthService } from './Services/auth-service/auth.service';
 
 
 @NgModule({
@@ -46,7 +47,7 @@ import { LockerviewComponent } from './lockerview/lockerview.component';
     HttpModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

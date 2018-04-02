@@ -1,11 +1,11 @@
 <div id=login>
 <h2> Entrar a Taquillas </h2>
-<p> Está intentando acceder a un área protegida. <br> Introduzca su usuario y contraseña:
+<p> Está intentando acceder a un área protegida. <br> Introduzca su usuario(123) y contraseña(password):
 </p>
 
-<form method="post">
-<input id="nia" name="nia" placeholder="NIA" type="text">
-<input id="password" name="password" placeholder="Contraseña" type="password">
-<button type="submit" value="Entrar" routerLink="/condiciones">Entrar</button>
+<form name='form' (ngSubmit)="login()" #f='ngForm' novalidate>
+<input id="nia" name="nia" placeholder="NIA" type="text" [(ngModel)]="user.login">
+<input id="password" name="password" placeholder="Contraseña" type="password" [(ngModel)]="user.password">
+<button [disabled]="loading">Entrar</button>
 </form>
 </div>
