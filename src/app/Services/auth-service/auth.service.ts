@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, RequestOptions, Response } from '@angular/http';
+import { Http, Headers, Request, RequestOptions, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { UserLogin } from '../../Classes/UserLogin';
 import 'rxjs/add/observable/throw';
@@ -8,7 +8,7 @@ import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class AuthService {
-  private apiURL = 'http://....';
+  private apiURL = 'https://delegacion.uc3m.es/baimen/';
 
   constructor(
     private http:Http
@@ -16,17 +16,14 @@ export class AuthService {
     
   }
 
-  //login(userLogin:UserLogin):Observable<boolean>
-  login(userLogin:UserLogin):boolean {
-    if(userLogin.login == "123" && userLogin.password == "password"){
-      sessionStorage.setItem('login', "ok");
-      return true;
-    }
-    
-    //let headers = new Headers({'user':userLogin.login, 'password':userLogin.password});
-    //let options = new RequestOptions({'headers':headers});
-    //return this.http.get(this.getURL('login'), options).map(this.getData).catch(this.error);
-    return false;
+  login(userLogin:UserLogin):Observable<boolean> {
+    let data = JSON.stringify({'nia':userLogin.login, 'password':userLogin.password});
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+
+    return this.http.post(this.getURL('login'), data, options)
+      .map(this.getData)
+      .catch(this.error);
   }
 
   logout():void {
@@ -35,7 +32,6 @@ export class AuthService {
 
   private error (error:any) {
     let msg = (error.message) ? error.message : 'Error desconocido';
-    console.error(msg);
     return Observable.throw(msg);
   }
 

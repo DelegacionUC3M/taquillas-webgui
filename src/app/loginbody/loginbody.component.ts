@@ -28,28 +28,19 @@ export class LoginbodyComponent implements OnInit {
 
   login() {
     this.loading = true;
-    if (this.authService.login(this.user)){
-    	//this.header.login();
-    	this.router.navigate(['/condiciones']);
-    }
-    else{
-    	this.user.login = "";
-    	this.user.password = "";
-    	this.loading = false;
-    }
-    //this.authService.login(this.user)
-     // .subscribe(result => {
-      //  if(result == true){
+    this.authService.login(this.user)
+     .subscribe(result => {
+       if(result == true){
           //Cambiar header
-        //  this.router.navigate(['/condiciones']);
-        //}else{
-         // this.error = 'Fallo en la autenticación';
-         // this.loading = false;
-        //}
-      //}, e => {
-        //this.error = 'Fallo en la autenticación';
-        //this.loading = false;
-      //});
+         this.router.navigate(['/condiciones']);
+        }else{
+         this.error = 'Fallo en la autenticación';
+         this.loading = false;
+        }
+      }, e => {
+        this.error = 'Fallo en la autenticación';
+        this.loading = false;
+      });
   }
 
 }
