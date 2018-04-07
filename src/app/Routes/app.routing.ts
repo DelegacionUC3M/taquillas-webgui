@@ -10,24 +10,25 @@ import { ManagerlockerlistComponent} from '../Components/managerlockerlist/manag
 import { TypeComponent } from '../Components/type/type.component';
 import { PlaceComponent } from '../Components/place/place.component';
 import { LockerviewComponent } from '../Components/lockerview/lockerview.component';
+import { AuthGuard } from '../Guards/auth.guard';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: 'login', component: LoginbodyComponent },
-  { path: 'condiciones', component: CondicionesComponent },
-  { path: 'reserva', component: LockerComponent },
-  { path: 'admin', component: AdminhomeComponent },
-  { path: 'manager', component: ManagerhomeComponent },
-  { path: 'admin/select', component: LockerselectorComponent },
-  { path: 'manager/select', component: LockerselectorComponent },
-  { path: 'manager/locker', component: ManagerlockerlistComponent },
-  { path: 'manager/type', component: TypeComponent },
-  { path: 'manager/place', component: PlaceComponent },
-  { path: 'manager/locker/:id', component: LockerviewComponent }
+    { path: '', redirectTo: '/login', pathMatch: 'full' },
+    { path: 'login', component: LoginbodyComponent },
+    { path: 'condiciones', component: CondicionesComponent, canActivate: [AuthGuard] },
+    { path: 'reserva', component: LockerComponent, canActivate: [AuthGuard] },
+    { path: 'admin', component: AdminhomeComponent, canActivate: [AuthGuard] },
+    { path: 'manager', component: ManagerhomeComponent, canActivate: [AuthGuard] },
+    { path: 'admin/select', component: LockerselectorComponent, canActivate: [AuthGuard] },
+    { path: 'manager/select', component: LockerselectorComponent, canActivate: [AuthGuard] },
+    { path: 'manager/locker', component: ManagerlockerlistComponent, canActivate: [AuthGuard] },
+    { path: 'manager/type', component: TypeComponent, canActivate: [AuthGuard] },
+    { path: 'manager/place', component: PlaceComponent, canActivate: [AuthGuard] },
+    { path: 'manager/locker/:id', component: LockerviewComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({
-  imports: [ RouterModule.forRoot(routes) ],
-  exports: [ RouterModule ]
+    imports: [ RouterModule.forRoot(routes) ],
+    exports: [ RouterModule ]
 })
 export class AppRouting { }

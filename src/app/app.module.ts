@@ -21,6 +21,7 @@ import { TypeComponent } from './Components/type/type.component';
 import { PlaceComponent } from './Components/place/place.component';
 import { LockerviewComponent } from './Components/lockerview/lockerview.component';
 import { AuthService } from './Services/auth-service/auth.service';
+import { AuthGuard } from './Guards/auth.guard';
 
 
 @NgModule({
@@ -47,7 +48,7 @@ import { AuthService } from './Services/auth-service/auth.service';
     HttpModule,
     AppRouting
   ],
-  providers: [AuthService],
+  providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
