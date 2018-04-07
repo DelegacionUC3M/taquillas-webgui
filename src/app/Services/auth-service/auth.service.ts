@@ -8,43 +8,40 @@ import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class AuthService {
-  private apiURL = 'https://delegacion.uc3m.es/baimen/';
+    private apiURL = 'https://delegacion.uc3m.es/baimen/';
 
-  constructor(
-    private http:Http
-  ) {
-    
-  }
-
-  login(userLogin:UserLogin):Observable<boolean> {
-    let data = JSON.stringify({'nia':userLogin.login, 'password':userLogin.password});
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: headers });
-
-    return this.http.post(this.getURL('login'), data, options)
-      .map(this.getData)
-      .catch(this.error);
-  }
-
-  logout():void {
-    sessionStorage.removeItem('token');
-  }
-
-  private error (error:any) {
-    let msg = (error.message) ? error.message : 'Error desconocido';
-    return Observable.throw(msg);
-  }
-
-  private getData(data:Response) {
-    let info = data.json();
-    if (info && info.token){
-      sessionStorage.setItem('token', info.token);
-      return true;
+    constructor(private http:Http) {
+      
     }
-    return false;
-  }
 
-  private getURL(endPoint:String) {
-    return this.apiURL + endPoint;
-  }
+    login(userLogin:UserLogin):Observable<boolean> {
+        let data = JSON.stringify({'nia':userLogin.login, 'password':userLogin.password});
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http.post(this.getURL('login'), data, options).map(this.getData).catch(this.error);
+    }
+
+    logout():void {
+        sessionStorage.removeItem('token');
+    }
+
+    private error (error:any) {
+        let err = error.json();
+        let msg = (err.error[0]) ? err.error[0] : 'Error desconocido';
+        return Observable.throw(msg);
+    }
+
+    private getData(data:Response) {
+        let info = data.json();
+        if (info && info.token){
+            sessionStorage.setItem('token', info.token);
+            return true;
+        }
+        return false;
+    }
+
+    private getURL(endPoint:String) {
+        return this.apiURL + endPoint;
+    }
 }

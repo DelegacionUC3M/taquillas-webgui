@@ -5,6 +5,7 @@
 	<form name='form' (ngSubmit)="login()" #f='ngForm' novalidate>
 		<input id="nia" name="nia" placeholder="NIA" type="text" [(ngModel)]="user.login">
 		<input id="password" name="password" placeholder="Contraseña" type="password" [(ngModel)]="user.password">
+		<div ng-if="isError">{{ error }}</div>
 		<button [disabled]="loading">Entrar</button>
 	</form>
 </div>

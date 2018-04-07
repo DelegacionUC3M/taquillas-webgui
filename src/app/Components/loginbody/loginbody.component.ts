@@ -4,43 +4,43 @@ import { AuthService } from '../../Services/auth-service/auth.service';
 import { UserLogin } from '../../Classes/UserLogin';
 
 @Component({
-  selector: 'app-loginbody',
-  templateUrl: './loginbody.component.html',
-  styleUrls: ['./loginbody.component.css']
+    selector: 'app-loginbody',
+    templateUrl: './loginbody.component.html',
+    styleUrls: ['./loginbody.component.css']
 })
 
 export class LoginbodyComponent implements OnInit {
 
-  user:UserLogin = new UserLogin();
-  error = '';
-  loading:boolean = false;
+    user:UserLogin = new UserLogin();
+    error = '';
+    isError:boolean = false; 
+    loading:boolean = false;
 
-  constructor(	
-  	private router:Router,
-    private authService:AuthService
-  ) { 
+    constructor(	
+        private router:Router,
+        private authService:AuthService
+    ) { 
 
-  }
+    }
 
-  ngOnInit() {
-  	this.authService.logout();
-  }
+    ngOnInit() {
+        this.authService.logout();
+    }
 
-  login() {
-    this.loading = true;
-    this.authService.login(this.user)
-     .subscribe(result => {
-       if(result == true){
-          //Cambiar header
-         this.router.navigate(['/condiciones']);
-        }else{
-         this.error = 'Fallo en la autenticación';
-         this.loading = false;
-        }
-      }, e => {
-        this.error = 'Fallo en la autenticación';
-        this.loading = false;
-      });
-  }
+    login() {
+        this.loading = true;
+        this.authService.login(this.user).subscribe(
+            result => {
+                //Cambiar header
+                this.isError = false;
+                this.router.navigate(['/condiciones']);      
+            }, 
+            e => {
+                this.error = e;
+                this.loading = false;
+                this.isError = true;
+            }
+        );
+    }
 
 }
