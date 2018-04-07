@@ -4,22 +4,22 @@ import { FormsModule } from '@angular/forms';
 
 
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
-import { FooterComponent } from './footer/footer.component';
-import { LoginbodyComponent } from './loginbody/loginbody.component';
-import { AppRoutingModule } from './/app-routing.module';
-import { CondicionesComponent } from './condiciones/condiciones.component';
-import { LockerComponent } from './locker/locker.component';
-import { AdminhomeComponent } from './adminhome/adminhome.component';
-import { ManagerhomeComponent } from './managerhome/managerhome.component';
-import { LockerselectorComponent } from './lockerselector/lockerselector.component';
-import { ManagerlockerlistComponent } from './managerlockerlist/managerlockerlist.component';
-import { LockerformComponent } from './lockerform/lockerform.component';
+import { HeaderComponent } from './Components/header/header.component';
+import { FooterComponent } from './Components/footer/footer.component';
+import { LoginbodyComponent } from './Components/loginbody/loginbody.component';
+import { AppRouting } from './Routes/app.routing';
+import { CondicionesComponent } from './Components/condiciones/condiciones.component';
+import { LockerComponent } from './Components/locker/locker.component';
+import { AdminhomeComponent } from './Components/adminhome/adminhome.component';
+import { ManagerhomeComponent } from './Components/managerhome/managerhome.component';
+import { LockerselectorComponent } from './Components/lockerselector/lockerselector.component';
+import { ManagerlockerlistComponent } from './Components/managerlockerlist/managerlockerlist.component';
+import { LockerformComponent } from './Components/lockerform/lockerform.component';
 import { HttpModule, JsonpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
-import { TypeComponent } from './type/type.component';
-import { PlaceComponent } from './place/place.component';
-import { LockerviewComponent } from './lockerview/lockerview.component';
+import { TypeComponent } from './Components/type/type.component';
+import { PlaceComponent } from './Components/place/place.component';
+import { LockerviewComponent } from './Components/lockerview/lockerview.component';
 import { AuthService } from './Services/auth-service/auth.service';
 
 
@@ -45,7 +45,7 @@ import { AuthService } from './Services/auth-service/auth.service';
     HttpClientModule,
     FormsModule,
     HttpModule,
-    AppRoutingModule
+    AppRouting
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]

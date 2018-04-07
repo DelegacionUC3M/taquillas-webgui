@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../Services/auth-service/auth.service';
-import { UserLogin } from '../Classes/UserLogin';
+import { AuthService } from '../../Services/auth-service/auth.service';
+import { UserLogin } from '../../Classes/UserLogin';
 
 @Component({
   selector: 'app-loginbody',

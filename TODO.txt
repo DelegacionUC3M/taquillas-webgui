@@ -1,4 +1,4 @@
--Login: hacer que el login funcione (mediante baimen) y hacer que cambie el header cuando el usuario esté logeado.
+-Login: hacer que cambie el header cuando el usuario esté logeado.
 endpoint: /login
 
 -Reserva: hacer que funcione el PUT para poder reservar una taquilla.
