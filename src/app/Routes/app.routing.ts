@@ -13,7 +13,6 @@ import { LockerviewComponent } from '../Components/lockerview/lockerview.compone
 import { AuthGuard } from '../Guards/auth.guard';
 
 const routes: Routes = [
-    { path: '', redirectTo: '/login', pathMatch: 'full' },
     { path: 'login', component: LoginbodyComponent },
     { path: 'condiciones', component: CondicionesComponent, canActivate: [AuthGuard] },
     { path: 'reserva', component: LockerComponent, canActivate: [AuthGuard] },
@@ -24,7 +23,9 @@ const routes: Routes = [
     { path: 'manager/locker', component: ManagerlockerlistComponent, canActivate: [AuthGuard] },
     { path: 'manager/type', component: TypeComponent, canActivate: [AuthGuard] },
     { path: 'manager/place', component: PlaceComponent, canActivate: [AuthGuard] },
-    { path: 'manager/locker/:id', component: LockerviewComponent, canActivate: [AuthGuard] }
+    { path: 'manager/locker/:id', component: LockerviewComponent, canActivate: [AuthGuard] },
+    { path: '', redirectTo: '/login', pathMatch: 'full' },
+    { path: '**', redirectTo: '/login'}
 ];
 
 @NgModule({

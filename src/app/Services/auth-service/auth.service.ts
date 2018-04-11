@@ -22,11 +22,19 @@ export class AuthService {
         return this.http.post(this.getURL('login'), data, options).map(this.getData).catch(this.error);
     }
 
+    verify():Observable<Response> {
+        let token = (sessionStorage.getItem('token')) ? sessionStorage.getItem('token') : 'falta token';
+        let headers = new Headers();
+        headers.append("Authorization", "Bearer " + token);
+        let options = new RequestOptions({ headers: headers });
+        return this.http.get(this.getURL('verify'), options).catch(this.error);
+    }
+
     logout():void {
         sessionStorage.removeItem('token');
     }
 
-    private error (error:any) {
+    private error(error:any) {
         let err = error.json();
         let msg = (err.error[0]) ? err.error[0] : 'Error desconocido';
         return Observable.throw(msg);
