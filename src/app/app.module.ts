@@ -21,6 +21,7 @@ import { TypeComponent } from './Components/type/type.component';
 import { PlaceComponent } from './Components/place/place.component';
 import { LockerviewComponent } from './Components/lockerview/lockerview.component';
 import { AuthService } from './Services/auth-service/auth.service';
+import { PublicApiService } from './Services/public-api-service/public.api.service';
 import { AuthGuard } from './Guards/auth.guard';
 
 
@@ -48,7 +49,7 @@ import { AuthGuard } from './Guards/auth.guard';
     HttpModule,
     AppRouting
   ],
-  providers: [AuthService, AuthGuard],
+  providers: [AuthService, PublicApiService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
