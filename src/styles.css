@@ -39,3 +39,5 @@ display: block;
 clear: both;
 overflow: hidden;
 }
+
+body { margin: 0; }

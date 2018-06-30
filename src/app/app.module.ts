@@ -23,6 +23,9 @@ import { LockerviewComponent } from './Components/lockerview/lockerview.componen
 import { AuthService } from './Services/auth-service/auth.service';
 import { PublicApiService } from './Services/public-api-service/public.api.service';
 import { AuthGuard } from './Guards/auth.guard';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TypesTableComponent } from './types-table/types-table.component';
+import { MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
 
 
 @NgModule({
@@ -40,14 +43,19 @@ import { AuthGuard } from './Guards/auth.guard';
     LockerformComponent,
     TypeComponent,
     PlaceComponent,
-    LockerviewComponent
+    LockerviewComponent,
+    TypesTableComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
     HttpModule,
-    AppRouting
+    AppRouting,
+    BrowserAnimationsModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule
   ],
   providers: [AuthService, PublicApiService, AuthGuard],
   bootstrap: [AppComponent]
