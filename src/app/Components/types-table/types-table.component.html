@@ -1,0 +1,67 @@
+<div class="mat-elevation-z8 types-table">
+
+    <mat-table #table [dataSource]="dataSource" matSort aria-label="Elements">
+        <!-- Id Column -->
+        <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Id</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.id}}</mat-cell>
+            <mat-footer-cell *matFooterCellDef>*</mat-footer-cell>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</mat-header-cell>
+            <mat-cell *matCellDef="let row">
+                <div *ngIf="selectedRow != row.id">
+                    {{row.name}}
+                </div>
+
+                <div *ngIf="selectedRow == row.id">
+                    <mat-form-field>
+                        <input matInput value="{{modifyType.name}}" [(ngModel)]="modifyType.name">
+                    </mat-form-field>
+                </div>
+            </mat-cell>
+        </ng-container>
+
+        <!-- Price Column -->
+        <ng-container matColumnDef="price">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Precio</mat-header-cell>
+            <mat-cell *matCellDef="let row">
+                <div *ngIf="selectedRow != row.id">
+                    {{row.price}}
+                </div>
+
+                <div *ngIf="selectedRow == row.id">
+                    <mat-form-field>
+                        <input matInput value="{{modifyType.price}}" [(ngModel)]="modifyType.price">
+                    </mat-form-field>
+                </div>
+            </mat-cell>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="edit">
+            <mat-header-cell *matHeaderCellDef></mat-header-cell>
+            <mat-cell *matCellDef="let row">
+                <button mat-button (click)="editSave(row)" *ngIf="selectedRow != row.id">Editar</button>
+                <button mat-button (click)="editSave(row)" *ngIf="selectedRow == row.id">Guardar</button>
+            </mat-cell>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="delete">
+            <mat-header-cell *matHeaderCellDef></mat-header-cell>
+            <mat-cell *matCellDef="let row">
+                <button mat-button (click)="deleteCancel(row)" *ngIf="selectedRow != row.id">Eliminar</button>
+                <button mat-button (click)="deleteCancel(row)" *ngIf="selectedRow == row.id">Cancelar</button>
+            </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+
+    <mat-paginator #paginator [length]="dataSource.data.length" [pageIndex]="0" [pageSize]="25" [pageSizeOptions]="[25, 50]">
+    </mat-paginator>
+</div>

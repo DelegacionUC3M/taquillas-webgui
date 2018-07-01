@@ -24,8 +24,8 @@ import { AuthService } from './Services/auth-service/auth.service';
 import { PublicApiService } from './Services/public-api-service/public.api.service';
 import { AuthGuard } from './Guards/auth.guard';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { TypesTableComponent } from './types-table/types-table.component';
-import { MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
+import { TypesTableComponent } from './Components/types-table/types-table.component';
+import { MatTableModule, MatPaginatorModule, MatSortModule, MatFormFieldModule, MatInputModule, MatButtonModule} from '@angular/material';
 
 
 @NgModule({
@@ -55,7 +55,10 @@ import { MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/mate
     BrowserAnimationsModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule
   ],
   providers: [AuthService, PublicApiService, AuthGuard],
   bootstrap: [AppComponent]

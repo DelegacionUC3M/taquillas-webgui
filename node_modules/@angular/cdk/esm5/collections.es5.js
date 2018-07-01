@@ -262,9 +262,23 @@ SelectionModel = /** @class */ (function () {
      * @return {?}
      */
     function (predicate) {
-        if (this._multiple && this._selected) {
-            this._selected.sort(predicate);
+        if (this._multiple && this.selected) {
+            /** @type {?} */ ((this._selected)).sort(predicate);
         }
+    };
+    /**
+     * Gets whether multiple values can be selected.
+     */
+    /**
+     * Gets whether multiple values can be selected.
+     * @return {?}
+     */
+    SelectionModel.prototype.isMultipleSelection = /**
+     * Gets whether multiple values can be selected.
+     * @return {?}
+     */
+    function () {
+        return this._multiple;
     };
     /**
      * Emits a change event and clears the records of selected and deselected values.

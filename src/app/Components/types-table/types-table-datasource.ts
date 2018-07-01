@@ -2,16 +2,10 @@ import { DataSource } from '@angular/cdk/collections';
 import { MatPaginator, MatSort } from '@angular/material';
 import { map } from 'rxjs/operators';
 import { Observable, of as observableOf, merge } from 'rxjs';
-
-// TODO: Replace this with your own data model type
-export interface TypesTableItem {
-  name: string;
-  id: number;
-  price: number;
-}
+import { Type } from '../../Classes/Type';
 
 // TODO: replace this with real data from your application
-const EXAMPLE_DATA: TypesTableItem[] = [
+const EXAMPLE_DATA: Type[] = [
   {id: 1, name: 'Simpe', price: 5.0},
   {id: 2, name: 'Doble', price: 10.0}
 ];
@@ -21,8 +15,8 @@ const EXAMPLE_DATA: TypesTableItem[] = [
  * encapsulate all logic for fetching and manipulating the displayed data
  * (including sorting, pagination, and filtering).
  */
-export class TypesTableDataSource extends DataSource<TypesTableItem> {
-  data: TypesTableItem[] = EXAMPLE_DATA;
+export class TypesTableDataSource extends DataSource<Type> {
+  data: Type[] = EXAMPLE_DATA;
 
   constructor(private paginator: MatPaginator, private sort: MatSort) {
     super();
@@ -33,7 +27,7 @@ export class TypesTableDataSource extends DataSource<TypesTableItem> {
    * the returned stream emits new items.
    * @returns A stream of the items to be rendered.
    */
-  connect(): Observable<TypesTableItem[]> {
+  connect(): Observable<Type[]> {
     // Combine everything that affects the rendered data into one update
     // stream for the data-table to consume.
     const dataMutations = [
@@ -60,7 +54,7 @@ export class TypesTableDataSource extends DataSource<TypesTableItem> {
    * Paginate the data (client-side). If you're using server-side pagination,
    * this would be replaced by requesting the appropriate data from the server.
    */
-  private getPagedData(data: TypesTableItem[]) {
+  private getPagedData(data: Type[]) {
     const startIndex = this.paginator.pageIndex * this.paginator.pageSize;
     return data.splice(startIndex, this.paginator.pageSize);
   }
@@ -69,7 +63,7 @@ export class TypesTableDataSource extends DataSource<TypesTableItem> {
    * Sort the data (client-side). If you're using server-side sorting,
    * this would be replaced by requesting the appropriate data from the server.
    */
-  private getSortedData(data: TypesTableItem[]) {
+  private getSortedData(data: Type[]) {
     if (!this.sort.active || this.sort.direction === '') {
       return data;
     }

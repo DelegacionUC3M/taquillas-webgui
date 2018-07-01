@@ -49,7 +49,7 @@ MatDialogConfig = /** @class */ (function () {
          */
         this.backdropClass = '';
         /**
-         * Whether the user can use escape or clicking outside to close a modal.
+         * Whether the user can use escape or clicking on the backdrop to close the modal.
          */
         this.disableClose = false;
         /**
@@ -319,6 +319,7 @@ var MatDialogContainer = /** @class */ (function (_super) {
                     host: {
                         'class': 'mat-dialog-container',
                         'tabindex': '-1',
+                        'aria-modal': 'true',
                         '[attr.id]': '_id',
                         '[attr.role]': '_config.role',
                         '[attr.aria-labelledby]': '_config.ariaLabel ? null : _ariaLabelledBy',
@@ -564,8 +565,8 @@ MatDialogRef = /** @class */ (function () {
      * @return {?}
      */
     function (width, height) {
-        if (width === void 0) { width = 'auto'; }
-        if (height === void 0) { height = 'auto'; }
+        if (width === void 0) { width = ''; }
+        if (height === void 0) { height = ''; }
         this._getPositionStrategy().width(width).height(height);
         this._overlayRef.updatePosition();
         return this;

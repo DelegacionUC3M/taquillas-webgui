@@ -44,7 +44,7 @@ class MatDialogConfig {
          */
         this.backdropClass = '';
         /**
-         * Whether the user can use escape or clicking outside to close a modal.
+         * Whether the user can use escape or clicking on the backdrop to close the modal.
          */
         this.disableClose = false;
         /**
@@ -269,6 +269,7 @@ MatDialogContainer.decorators = [
                 host: {
                     'class': 'mat-dialog-container',
                     'tabindex': '-1',
+                    'aria-modal': 'true',
                     '[attr.id]': '_id',
                     '[attr.role]': '_config.role',
                     '[attr.aria-labelledby]': '_config.ariaLabel ? null : _ariaLabelledBy',
@@ -446,7 +447,7 @@ class MatDialogRef {
      * @param {?=} height New height of the dialog.
      * @return {?}
      */
-    updateSize(width = 'auto', height = 'auto') {
+    updateSize(width = '', height = '') {
         this._getPositionStrategy().width(width).height(height);
         this._overlayRef.updatePosition();
         return this;
