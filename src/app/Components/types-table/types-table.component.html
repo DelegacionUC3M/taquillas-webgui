@@ -1,3 +1,17 @@
+<div class="types-table">
+    <mat-card>
+        <mat-form-field>
+            <input matInput placeholder="Nombre" value="{{newTypeObject.name}}" [(ngModel)]="newTypeObject.name">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Precio" value="{{newTypeObject.price}}" [(ngModel)]="newTypeObject.price">
+        </mat-form-field>
+       
+        <button mat-button (click)="newType()">Nuevo</button>
+       
+    </mat-card>
+</div>
+
 <div class="mat-elevation-z8 types-table">
 
     <mat-table #table [dataSource]="dataSource" matSort aria-label="Elements">
@@ -29,7 +43,7 @@
             <mat-header-cell *matHeaderCellDef mat-sort-header>Precio</mat-header-cell>
             <mat-cell *matCellDef="let row">
                 <div *ngIf="selectedRow != row.id">
-                    {{row.price}}
+                    {{row.price}} €
                 </div>
 
                 <div *ngIf="selectedRow == row.id">

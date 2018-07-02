@@ -27,6 +27,7 @@ export class TypesTableComponent implements OnInit {
 
     selectedRow: number = null;
     modifyType: Type = new Type;
+    newTypeObject: Type = new Type;
 
     constructor(private dialog: MatDialog, public snackBar: MatSnackBar) {
 
