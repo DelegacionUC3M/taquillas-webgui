@@ -1,5 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, MatSort, MatInputModule, MatFormFieldModule } from '@angular/material';
+import {    
+    MatPaginator, 
+    MatSort, 
+    MatInputModule, 
+    MatFormFieldModule, 
+    MatSnackBar,
+    MatSnackBarConfig
+} from '@angular/material';
 import { MatDialog } from '@angular/material';
 import { TypesTableDataSource } from './types-table-datasource';
 import { Type } from '../../Classes/Type';
@@ -21,7 +28,7 @@ export class TypesTableComponent implements OnInit {
     selectedRow: number = null;
     modifyType: Type = new Type;
 
-    constructor(private dialog: MatDialog) {
+    constructor(private dialog: MatDialog, public snackBar: MatSnackBar) {
 
     }
 
@@ -66,7 +73,16 @@ export class TypesTableComponent implements OnInit {
         dialogRef.afterClosed().subscribe((result: boolean) => {
             if (result) {
                 console.log("Eliminar tipo con id: " + row.id);
+                this.showSnackbar("Eliminado correctamente");
             }
         });
+    }
+
+    showSnackbar(msg:string):void {
+        let config = new MatSnackBarConfig();
+        config.verticalPosition = "top";
+        config.horizontalPosition = "right";
+        config.duration = 3000;
+        this.snackBar.open(msg, "OK", config);
     }
 }

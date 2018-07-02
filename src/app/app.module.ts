@@ -26,47 +26,55 @@ import { AuthGuard } from './Guards/auth.guard';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TypesTableComponent } from './Components/types-table/types-table.component';
 import { ConfirmationDialog } from './Components/confirmation-dialog/confirmation.dialog.component';
-import { MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
-import { MatFormFieldModule, MatInputModule, MatButtonModule } from '@angular/material';
-import { MatDialogModule } from '@angular/material';
+import {
+    MatTableModule, 
+    MatPaginatorModule, 
+    MatSortModule,
+    MatFormFieldModule, 
+    MatInputModule, 
+    MatButtonModule,
+    MatDialogModule,
+    MatSnackBarModule 
+} from '@angular/material';
 
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent,
-    FooterComponent,
-    LoginbodyComponent,
-    CondicionesComponent,
-    LockerComponent,
-    AdminhomeComponent,
-    ManagerhomeComponent,
-    LockerselectorComponent,
-    ManagerlockerlistComponent,
-    LockerformComponent,
-    TypeComponent,
-    PlaceComponent,
-    LockerviewComponent,
-    TypesTableComponent,
-    ConfirmationDialog
-  ],
-  entryComponents: [ConfirmationDialog],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    FormsModule,
-    HttpModule,
-    AppRouting,
-    BrowserAnimationsModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatSortModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    MatDialogModule
-  ],
-  providers: [AuthService, PublicApiService, AuthGuard],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        HeaderComponent,
+        FooterComponent,
+        LoginbodyComponent,
+        CondicionesComponent,
+        LockerComponent,
+        AdminhomeComponent,
+        ManagerhomeComponent,
+        LockerselectorComponent,
+        ManagerlockerlistComponent,
+        LockerformComponent,
+        TypeComponent,
+        PlaceComponent,
+        LockerviewComponent,
+        TypesTableComponent,
+        ConfirmationDialog
+    ],
+    entryComponents: [ConfirmationDialog],
+    imports: [
+        BrowserModule,
+        HttpClientModule,
+        FormsModule,
+        HttpModule,
+        AppRouting,
+        BrowserAnimationsModule,
+        MatTableModule,
+        MatPaginatorModule,
+        MatSortModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatButtonModule,
+        MatDialogModule,
+        MatSnackBarModule
+    ],
+    providers: [AuthService, PublicApiService, AuthGuard],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }
