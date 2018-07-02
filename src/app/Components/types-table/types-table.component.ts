@@ -1,14 +1,15 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort, MatInputModule, MatFormFieldModule } from '@angular/material';
+import { MatDialog } from '@angular/material';
 import { TypesTableDataSource } from './types-table-datasource';
 import { Type } from '../../Classes/Type';
+import { ConfirmationDialog } from '../../Components/confirmation-dialog/confirmation.dialog.component';
 
 @Component({
     selector: 'types-table',
     templateUrl: './types-table.component.html',
     styleUrls: ['./types-table.component.css']
 })
-
 export class TypesTableComponent implements OnInit {
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
@@ -20,7 +21,7 @@ export class TypesTableComponent implements OnInit {
     selectedRow: number = null;
     modifyType: Type = new Type;
 
-    constructor() {
+    constructor(private dialog: MatDialog) {
 
     }
 
@@ -50,13 +51,22 @@ export class TypesTableComponent implements OnInit {
             this.selectedRow = null;
         }
         else {
-            // Eliminar la fila
-           
+            // Confirmacion eliminar fila
+            this.openDialog(row);
         }
     }
 
     newType(): void {
-        
+
+    }
+
+    openDialog(row: Type): void {
+        const dialogRef = this.dialog.open(ConfirmationDialog);
+
+        dialogRef.afterClosed().subscribe((result: boolean) => {
+            if (result) {
+                console.log("Eliminar tipo con id: " + row.id);
+            }
+        });
     }
 }
-

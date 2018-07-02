@@ -25,7 +25,10 @@ import { PublicApiService } from './Services/public-api-service/public.api.servi
 import { AuthGuard } from './Guards/auth.guard';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TypesTableComponent } from './Components/types-table/types-table.component';
-import { MatTableModule, MatPaginatorModule, MatSortModule, MatFormFieldModule, MatInputModule, MatButtonModule} from '@angular/material';
+import { ConfirmationDialog } from './Components/confirmation-dialog/confirmation.dialog.component';
+import { MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
+import { MatFormFieldModule, MatInputModule, MatButtonModule } from '@angular/material';
+import { MatDialogModule } from '@angular/material';
 
 
 @NgModule({
@@ -44,8 +47,10 @@ import { MatTableModule, MatPaginatorModule, MatSortModule, MatFormFieldModule, 
     TypeComponent,
     PlaceComponent,
     LockerviewComponent,
-    TypesTableComponent
+    TypesTableComponent,
+    ConfirmationDialog
   ],
+  entryComponents: [ConfirmationDialog],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -58,7 +63,8 @@ import { MatTableModule, MatPaginatorModule, MatSortModule, MatFormFieldModule, 
     MatSortModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    MatDialogModule
   ],
   providers: [AuthService, PublicApiService, AuthGuard],
   bootstrap: [AppComponent]
