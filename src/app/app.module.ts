@@ -37,7 +37,8 @@ import {
     MatDialogModule,
     MatSnackBarModule,
     MatCardModule,
-    MatDividerModule
+    MatDividerModule,
+    MatSelectModule
 } from '@angular/material';
 
 
@@ -78,7 +79,8 @@ import {
         MatDialogModule,
         MatSnackBarModule,
         MatCardModule,
-        MatDividerModule
+        MatDividerModule,
+        MatSelectModule
     ],
     providers: [AuthService, PublicApiService, AuthGuard],
     bootstrap: [AppComponent]

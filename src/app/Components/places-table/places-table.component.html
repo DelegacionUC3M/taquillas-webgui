@@ -7,16 +7,20 @@
 <div class="places-table">
     <mat-card>
         <mat-form-field>
-            <input matInput placeholder="Campus" value="{{newPlaceObject.school}}" [(ngModel)]="newPlaceObject.school">
+            <mat-select placeholder="Campus" required>
+                <mat-option *ngFor="let school of schoolName" [value]="schoolName.indexOf(school) + 1">
+                    {{school}}
+                </mat-option>
+            </mat-select>
         </mat-form-field>
         <mat-form-field>
-            <input matInput placeholder="Edificio" value="{{newPlaceObject.building}}" [(ngModel)]="newPlaceObject.building">
+            <input matInput placeholder="Edificio" value="{{newPlaceObject.building}}" [(ngModel)]="newPlaceObject.building" required>
         </mat-form-field>
         <mat-form-field>
-            <input matInput placeholder="Planta" value="{{newPlaceObject.floor}}" [(ngModel)]="newPlaceObject.floor">
+            <input matInput placeholder="Planta" value="{{newPlaceObject.floor}}" [(ngModel)]="newPlaceObject.floor" type="number" required>
         </mat-form-field>
         <mat-form-field>
-            <input matInput placeholder="Zona" value="{{newPlaceObject.zone}}" [(ngModel)]="newPlaceObject.zone">
+            <input matInput placeholder="Zona" value="{{newPlaceObject.zone}}" [(ngModel)]="newPlaceObject.zone" required>
         </mat-form-field>
 
         <button mat-button (click)="newPlace()">Nuevo</button>
@@ -34,23 +38,27 @@
             <mat-footer-cell *matFooterCellDef>*</mat-footer-cell>
         </ng-container>
 
-        <!-- Name Column -->
+        <!-- School Column -->
         <ng-container matColumnDef="school">
             <mat-header-cell *matHeaderCellDef mat-sort-header>Campus</mat-header-cell>
             <mat-cell *matCellDef="let row">
                 <div *ngIf="selectedRow != row.id">
-                    {{row.school}}
+                    {{schoolName[row.school-1]}}
                 </div>
 
                 <div *ngIf="selectedRow == row.id">
                     <mat-form-field>
-                        <input matInput value="{{modifyPlace.school}}" [(ngModel)]="modifyPlace.school">
+                        <mat-select [(value)]="modifyPlace.school" required>
+                            <mat-option *ngFor="let school of schoolName" [value]="schoolName.indexOf(school) + 1">
+                                {{school}}
+                            </mat-option>
+                        </mat-select>
                     </mat-form-field>
                 </div>
             </mat-cell>
         </ng-container>
 
-        <!-- Price Column -->
+        <!-- Building Column -->
         <ng-container matColumnDef="building">
             <mat-header-cell *matHeaderCellDef mat-sort-header>Edificio</mat-header-cell>
             <mat-cell *matCellDef="let row">
@@ -60,13 +68,13 @@
 
                 <div *ngIf="selectedRow == row.id">
                     <mat-form-field>
-                        <input matInput value="{{modifyPlace.building}}" [(ngModel)]="modifyPlace.building">
+                        <input matInput value="{{modifyPlace.building}}" [(ngModel)]="modifyPlace.building" required>
                     </mat-form-field>
                 </div>
             </mat-cell>
         </ng-container>
 
-        <!-- Price Column -->
+        <!-- Floor Column -->
         <ng-container matColumnDef="floor">
             <mat-header-cell *matHeaderCellDef mat-sort-header>Planta</mat-header-cell>
             <mat-cell *matCellDef="let row">
@@ -76,13 +84,13 @@
 
                 <div *ngIf="selectedRow == row.id">
                     <mat-form-field>
-                        <input matInput value="{{modifyPlace.floor}}" [(ngModel)]="modifyPlace.floor">
+                        <input matInput value="{{modifyPlace.floor}}" [(ngModel)]="modifyPlace.floor" type="number" required>
                     </mat-form-field>
                 </div>
             </mat-cell>
         </ng-container>
 
-        <!-- Price Column -->
+        <!-- Zone Column -->
         <ng-container matColumnDef="zone">
             <mat-header-cell *matHeaderCellDef mat-sort-header>Zona</mat-header-cell>
             <mat-cell *matCellDef="let row">
@@ -92,13 +100,13 @@
 
                 <div *ngIf="selectedRow == row.id">
                     <mat-form-field>
-                        <input matInput value="{{modifyPlace.zone}}" [(ngModel)]="modifyPlace.zone">
+                        <input matInput value="{{modifyPlace.zone}}" [(ngModel)]="modifyPlace.zone" required>
                     </mat-form-field>
                 </div>
             </mat-cell>
         </ng-container>
 
-        <!-- Name Column -->
+        <!-- Edit Column -->
         <ng-container matColumnDef="edit">
             <mat-header-cell *matHeaderCellDef></mat-header-cell>
             <mat-cell *matCellDef="let row">
@@ -107,7 +115,7 @@
             </mat-cell>
         </ng-container>
 
-        <!-- Name Column -->
+        <!-- Delete Column -->
         <ng-container matColumnDef="delete">
             <mat-header-cell *matHeaderCellDef></mat-header-cell>
             <mat-cell *matCellDef="let row">

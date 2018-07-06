@@ -5,9 +5,10 @@ import {
     MatInputModule, 
     MatFormFieldModule, 
     MatSnackBar,
-    MatSnackBarConfig
+    MatSnackBarConfig,
+    MatDialog
 } from '@angular/material';
-import { MatDialog } from '@angular/material';
+import { FormControl, Validators } from '@angular/forms';
 import { PlacesTableDataSource } from './places-table-datasource';
 import { Place } from '../../Classes/Place';
 import { ConfirmationDialog } from '../../Components/confirmation-dialog/confirmation.dialog.component';
@@ -29,8 +30,11 @@ export class PlacesTableComponent implements OnInit {
     modifyPlace: Place = new Place;
     newPlaceObject: Place = new Place;
 
-    constructor(private dialog: MatDialog, public snackBar: MatSnackBar) {
+    schoolName = ['CCSSJJ', 'Leganés'];
+    schoolControl = new FormControl('', [Validators.required]);
 
+    constructor(private dialog: MatDialog, public snackBar: MatSnackBar) {
+        
     }
 
     ngOnInit() {
