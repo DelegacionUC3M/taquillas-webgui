@@ -7,10 +7,10 @@
 <div class="types-table">
     <mat-card>
         <mat-form-field>
-            <input matInput placeholder="Nombre" value="{{newTypeObject.name}}" [(ngModel)]="newTypeObject.name">
+            <input matInput placeholder="Nombre" value="{{newTypeObject.name}}" [(ngModel)]="newTypeObject.name" required>
         </mat-form-field>
         <mat-form-field>
-            <input matInput placeholder="Precio" value="{{newTypeObject.price}}" [(ngModel)]="newTypeObject.price">
+            <input matInput placeholder="Precio" value="{{newTypeObject.price}}" [(ngModel)]="newTypeObject.price" required>
         </mat-form-field>
        
         <button mat-button (click)="newType()">Nuevo</button>
@@ -38,7 +38,7 @@
 
                 <div *ngIf="selectedRow == row.id">
                     <mat-form-field>
-                        <input matInput value="{{modifyType.name}}" [(ngModel)]="modifyType.name">
+                        <input matInput value="{{modifyType.name}}" [(ngModel)]="modifyType.name" required>
                     </mat-form-field>
                 </div>
             </mat-cell>
@@ -54,13 +54,13 @@
 
                 <div *ngIf="selectedRow == row.id">
                     <mat-form-field>
-                        <input matInput value="{{modifyType.price}}" [(ngModel)]="modifyType.price">
+                        <input matInput value="{{modifyType.price}}" [(ngModel)]="modifyType.price" type="number" required>
                     </mat-form-field>
                 </div>
             </mat-cell>
         </ng-container>
 
-        <!-- Name Column -->
+        <!-- Edit Column -->
         <ng-container matColumnDef="edit">
             <mat-header-cell *matHeaderCellDef></mat-header-cell>
             <mat-cell *matCellDef="let row">
@@ -69,7 +69,7 @@
             </mat-cell>
         </ng-container>
 
-        <!-- Name Column -->
+        <!-- Delete Column -->
         <ng-container matColumnDef="delete">
             <mat-header-cell *matHeaderCellDef></mat-header-cell>
             <mat-cell *matCellDef="let row">
