@@ -28,7 +28,6 @@ export class PlacesTableComponent implements OnInit {
 
     selectedRow: number = null;
     modifyPlace: Place = new Place;
-    newPlaceObject: Place = new Place;
 
     schoolName = ['CCSSJJ', 'Leganés'];
     schoolControl = new FormControl('', [Validators.required]);
@@ -67,8 +66,8 @@ export class PlacesTableComponent implements OnInit {
         }
     }
 
-    newPlace(): void {
-
+    update(): void {
+        console.log('update');
     }
 
     openDialog(row: Place): void {

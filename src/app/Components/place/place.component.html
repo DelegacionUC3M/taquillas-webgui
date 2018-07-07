@@ -1,6 +1,9 @@
 <div class="place">
-    <places-table></places-table>
+    <div class="tittle">
+        <mat-card>
+            Gestión de Lugares
+        </mat-card>
+    </div>
+    <new-place [placesTable]="placesTable"></new-place>
+    <places-table #placesTable></places-table>
 </div>
-
-<!-- <option name="CCSSJJ" [value]=1>CCSSJJ</option>
-<option name="Leganes" [value]=2>Leganés</option> -->

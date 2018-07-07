@@ -1,33 +1,3 @@
-<div class="places-table">
-    <mat-card>
-        Gestión de Lugares
-    </mat-card>
-</div>
-
-<div class="places-table">
-    <mat-card>
-        <mat-form-field>
-            <mat-select placeholder="Campus" required>
-                <mat-option *ngFor="let school of schoolName" [value]="schoolName.indexOf(school) + 1">
-                    {{school}}
-                </mat-option>
-            </mat-select>
-        </mat-form-field>
-        <mat-form-field>
-            <input matInput placeholder="Edificio" value="{{newPlaceObject.building}}" [(ngModel)]="newPlaceObject.building" required>
-        </mat-form-field>
-        <mat-form-field>
-            <input matInput placeholder="Planta" value="{{newPlaceObject.floor}}" [(ngModel)]="newPlaceObject.floor" type="number" required>
-        </mat-form-field>
-        <mat-form-field>
-            <input matInput placeholder="Zona" value="{{newPlaceObject.zone}}" [(ngModel)]="newPlaceObject.zone" required>
-        </mat-form-field>
-
-        <button mat-button (click)="newPlace()">Nuevo</button>
-
-    </mat-card>
-</div>
-
 <div class="mat-elevation-z8 places-table">
 
     <mat-table #table [dataSource]="dataSource" matSort aria-label="Elements">

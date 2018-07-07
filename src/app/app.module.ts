@@ -41,6 +41,7 @@ import {
     MatDividerModule,
     MatSelectModule
 } from '@angular/material';
+import { NewPlaceComponent } from './Components/new-place/new-place.component';
 
 
 @NgModule({
@@ -62,7 +63,8 @@ import {
         TypesTableComponent,
         PlacesTableComponent,
         ConfirmationDialog,
-        NewTypeComponent
+        NewTypeComponent,
+        NewPlaceComponent
     ],
     entryComponents: [ConfirmationDialog],
     imports: [
