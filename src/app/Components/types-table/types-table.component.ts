@@ -5,9 +5,9 @@ import {
     MatInputModule, 
     MatFormFieldModule, 
     MatSnackBar,
-    MatSnackBarConfig
+    MatSnackBarConfig,
+    MatDialog
 } from '@angular/material';
-import { MatDialog } from '@angular/material';
 import { TypesTableDataSource } from './types-table-datasource';
 import { Type } from '../../Classes/Type';
 import { ConfirmationDialog } from '../../Components/confirmation-dialog/confirmation.dialog.component';
@@ -18,6 +18,7 @@ import { ConfirmationDialog } from '../../Components/confirmation-dialog/confirm
     styleUrls: ['./types-table.component.css']
 })
 export class TypesTableComponent implements OnInit {
+    
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
     dataSource: TypesTableDataSource;
@@ -27,7 +28,6 @@ export class TypesTableComponent implements OnInit {
 
     selectedRow: number = null;
     modifyType: Type = new Type;
-    newTypeObject: Type = new Type;
 
     constructor(private dialog: MatDialog, public snackBar: MatSnackBar) {
 
@@ -64,8 +64,8 @@ export class TypesTableComponent implements OnInit {
         }
     }
 
-    newType(): void {
-
+    update(): void {
+        console.log('Update');
     }
 
     openDialog(row: Type): void {

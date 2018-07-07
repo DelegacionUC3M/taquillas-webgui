@@ -1,0 +1,13 @@
+<div class="new-type">
+    <mat-card>
+        <mat-form-field>
+            <input matInput placeholder="Nombre" value="{{newTypeObject.name}}" [(ngModel)]="newTypeObject.name" required>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Precio" value="{{newTypeObject.price}}" [(ngModel)]="newTypeObject.price" required>
+        </mat-form-field>
+
+        <button mat-button (click)="newType()">Nuevo</button>
+
+    </mat-card>
+</div>

@@ -25,6 +25,7 @@ import { PublicApiService } from './Services/public-api-service/public.api.servi
 import { AuthGuard } from './Guards/auth.guard';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TypesTableComponent } from './Components/types-table/types-table.component';
+import { NewTypeComponent } from './Components/new-type/new-type.component';
 import { PlacesTableComponent } from './Components/places-table/places-table.component';
 import { ConfirmationDialog } from './Components/confirmation-dialog/confirmation.dialog.component';
 import {
@@ -60,7 +61,8 @@ import {
         LockerviewComponent,
         TypesTableComponent,
         PlacesTableComponent,
-        ConfirmationDialog
+        ConfirmationDialog,
+        NewTypeComponent
     ],
     entryComponents: [ConfirmationDialog],
     imports: [
