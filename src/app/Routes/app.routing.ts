@@ -21,10 +21,8 @@ const routes: Routes = [
     { path: 'admin/select', component: LockerselectorComponent, canActivate: [AuthGuard] },
     { path: 'manager/select', component: LockerselectorComponent, canActivate: [AuthGuard] },
     { path: 'manager/locker', component: ManagerlockerlistComponent, canActivate: [AuthGuard] },
-    //{ path: 'manager/type', component: TypeComponent, canActivate: [AuthGuard] },
-    { path: 'manager/type', component: TypeComponent },
-    // { path: 'manager/place', component: PlaceComponent, canActivate: [AuthGuard] },
-    { path: 'manager/place', component: PlaceComponent },
+    { path: 'manager/type', component: TypeComponent, canActivate: [AuthGuard] },
+    { path: 'manager/place', component: PlaceComponent, canActivate: [AuthGuard] },
     { path: 'manager/locker/:id', component: LockerviewComponent, canActivate: [AuthGuard] },
     { path: '', redirectTo: '/login', pathMatch: 'full' },
     { path: '**', redirectTo: '/login'}

@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../Services/auth-service/auth.service';
 import { UserLogin } from '../../Classes/UserLogin';
 
@@ -15,8 +15,10 @@ export class LoginbodyComponent implements OnInit {
     error = '';
     isError:boolean = false; 
     loading:boolean = false;
+    returnUrl: string;
 
-    constructor(	
+    constructor(
+        private route: ActivatedRoute,	
         private router:Router,
         private authService:AuthService
     ) { 
@@ -25,6 +27,7 @@ export class LoginbodyComponent implements OnInit {
 
     ngOnInit() {
         this.authService.logout();
+        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/condiciones';
     }
 
     login() {
@@ -33,7 +36,7 @@ export class LoginbodyComponent implements OnInit {
             result => {
                 //Cambiar header
                 this.isError = false;
-                this.router.navigate(['/condiciones']);      
+                this.router.navigateByUrl(this.returnUrl);      
             }, 
             e => {
                 this.error = e;

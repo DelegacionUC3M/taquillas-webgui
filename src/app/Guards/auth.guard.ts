@@ -12,19 +12,21 @@ export class AuthGuard implements CanActivate {
 	constructor(
 		private router:Router,
 		private authService:AuthService
-	) {}
+	) {
+		
+	}
 
 	canActivate(route:ActivatedRouteSnapshot, state:RouterStateSnapshot):Observable<boolean>|boolean {
 		return this.authService.verify().map((auth) => {
 				if(auth.status == 200){
 					return true;
 				}
+				this.router.navigate(['login'], { queryParams: { returnUrl: state.url }});
 				return false;
-			}).catch((error: any) => {
-            	this.router.navigateByUrl('/login');
-            	// return Observable.of(false);
-            	return Observable.throw("Error de autenticacion");          	
-        	}
-        );
+			}).catch((error: any) => Observable.throw(this.error(error, state.url)));
 	}
+
+	private error(error:any, url:any): void {
+		this.router.navigate(['login'], { queryParams: { returnUrl: url }});
+    }
 }
