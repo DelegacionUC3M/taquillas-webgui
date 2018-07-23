@@ -4,22 +4,24 @@ import { map } from 'rxjs/operators';
 import { Observable, of as observableOf, merge } from 'rxjs';
 import { Place } from '../../Classes/Place';
 
-// TODO: replace this with real data from your application
-const EXAMPLE_DATA: Place[] = [
-    { id: 1, building: 'Edificio 1', zone: 'A', floor: 1, school: 1 },
-    { id: 2, building: 'Edificio 2', zone: 'B', floor: 2, school: 2 },
-];
-
 /**
  * Data source for the PlacesTable view. This class should
  * encapsulate all logic for fetching and manipulating the displayed data
  * (including sorting, pagination, and filtering).
  */
 export class PlacesTableDataSource extends DataSource<Place> {
-    data: Place[] = EXAMPLE_DATA;
 
-    constructor(private paginator: MatPaginator, private sort: MatSort) {
+    constructor(
+        private data: Place[],
+        private paginator: MatPaginator, 
+        private sort: MatSort
+    ) {
         super();
+    }
+
+    loadData(data: Place[]): void {
+        this.data = data;
+        this.paginator._changePageSize(this.paginator.pageSize); // Actualiza la vista
     }
 
     /**

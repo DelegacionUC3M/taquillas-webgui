@@ -12,6 +12,8 @@ import { FormControl, Validators } from '@angular/forms';
 import { PlacesTableDataSource } from './places-table-datasource';
 import { Place } from '../../Classes/Place';
 import { ConfirmationDialog } from '../../Components/confirmation-dialog/confirmation.dialog.component';
+import { PublicApiService } from '../../Services/public-api-service/public.api.service';
+import { ManagerApiService } from '../../Services/manager-api-service/manager.api.service';
 
 @Component({
     selector: 'places-table',
@@ -32,25 +34,46 @@ export class PlacesTableComponent implements OnInit {
     schoolName = ['CCSSJJ', 'Leganés'];
     schoolControl = new FormControl('', [Validators.required]);
 
-    constructor(private dialog: MatDialog, public snackBar: MatSnackBar) {
+    constructor(
+        private dialog: MatDialog, 
+        public snackBar: MatSnackBar,
+        private publicApiService: PublicApiService,
+        private managerApi:ManagerApiService
+    ) {
         
     }
 
     ngOnInit() {
-        this.dataSource = new PlacesTableDataSource(this.paginator, this.sort);
-
+        this.publicApiService.getPlaces().subscribe(
+            result => {
+                this.dataSource = new PlacesTableDataSource(result, this.paginator, this.sort);   
+            }
+        ); 
     }
 
     editSave(row: Place): void {
         if (this.selectedRow == row.id) {
             // Guardar la modificacion
+            this.managerApi.modifyPlace(
+                row.id, 
+                this.modifyPlace.building, 
+                this.modifyPlace.zone, 
+                this.modifyPlace.floor, 
+                this.modifyPlace.school
+            ).subscribe(
+                result => {
+                    this.update();
+                    this.showSnackbar(result.success);  
+                },
+                err => {
+                    this.showSnackbar(err.error);
+                }
+            );
             this.selectedRow = null;
-            console.log(this.modifyPlace);
         }
         else {
             // Se activan los inputs para modificar la fila seleccionada
             this.modifyPlace = row;
-
             this.selectedRow = row.id;
         }
     }
@@ -62,12 +85,16 @@ export class PlacesTableComponent implements OnInit {
         }
         else {
             // Confirmacion eliminar fila
-            this.openDialog(row);
+            this.openDialog(row);    
         }
     }
 
     update(): void {
-        console.log('update');
+        this.publicApiService.getPlaces().subscribe(
+            result => {
+                this.dataSource.loadData(result); 
+            }
+        );
     }
 
     openDialog(row: Place): void {
@@ -75,8 +102,15 @@ export class PlacesTableComponent implements OnInit {
 
         dialogRef.afterClosed().subscribe((result: boolean) => {
             if (result) {
-                console.log("Eliminar lugar con id: " + row.id);
-                this.showSnackbar("Eliminado correctamente");
+                this.managerApi.deletePlace(row.id).subscribe(
+                    result => {
+                        this.update();
+                        this.showSnackbar(result.success);  
+                    },
+                    err => {
+                        this.showSnackbar(err.error);
+                    }
+                );
             }
         });
     }

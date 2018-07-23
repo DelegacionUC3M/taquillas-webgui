@@ -30,6 +30,27 @@ export class ManagerApiService {
         return this.http.delete(this.getURL('type/' + id), this.getOptions()).map(this.getData).catch(this.error);
     }
 
+    newPlace(building: string, zone: string, floor:number, school:number): Observable<any> {
+        var json = '{"building": "' + building 
+                    + '", "zone": "' + zone 
+                    + '", "floor": "' + floor 
+                    + '", "school": "' + school + '"}';
+                    console.log(json);
+        return this.http.post(this.getURL('place'), json, this.getOptions()).map(this.getData).catch(this.error);
+    }
+
+    modifyPlace(id: number, building: string, zone: string, floor:number, school:number): Observable<any> {
+        var json = '{"building": "' + building 
+                    + '", "zone": "' + zone 
+                    + '", "floor": "' + floor 
+                    + '", "school": "' + school +'"}';
+        return this.http.put(this.getURL('place/' + id), json, this.getOptions()).map(this.getData).catch(this.error);
+    }
+
+    deletePlace(id: number) {
+        return this.http.delete(this.getURL('place/' + id), this.getOptions()).map(this.getData).catch(this.error);
+    }
+
     private error(error: any) {
         let err = error.json();
         let msg = (err.error[0]) ? err.error[0] : 'Error desconocido';

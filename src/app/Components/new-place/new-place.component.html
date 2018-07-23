@@ -1,7 +1,7 @@
 <div class="new-place">
     <mat-card>
         <mat-form-field>
-            <mat-select placeholder="Campus" required>
+            <mat-select placeholder="Campus" [(value)]="newPlaceObject.school" required>
                 <mat-option *ngFor="let school of schoolName" [value]="schoolName.indexOf(school) + 1">
                     {{school}}
                 </mat-option>

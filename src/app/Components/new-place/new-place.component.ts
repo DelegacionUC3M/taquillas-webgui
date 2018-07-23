@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ManagerApiService } from '../../Services/manager-api-service/manager.api.service';
 import { PlacesTableComponent } from '../places-table/places-table.component';
 import { Place } from '../../Classes/Place';
 
@@ -14,7 +15,7 @@ export class NewPlaceComponent implements OnInit {
     newPlaceObject:Place = new Place;
     schoolName = ['CCSSJJ', 'Leganés'];
 
-    constructor() { 
+    constructor(private managerApi:ManagerApiService) { 
 
     }
 
@@ -23,7 +24,15 @@ export class NewPlaceComponent implements OnInit {
     }
 
     newPlace(): void {
-        this.placesTable.update();
+        this.managerApi.newPlace(this.newPlaceObject.building, this.newPlaceObject.zone, this.newPlaceObject.floor, this.newPlaceObject.school).subscribe(
+            result => {
+                this.placesTable.update();
+                this.placesTable.showSnackbar(result.success); 
+            },
+            error => {
+                this.placesTable.showSnackbar(error.error);
+            }
+        );
     }
 
 }

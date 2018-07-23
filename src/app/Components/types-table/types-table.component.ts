@@ -64,9 +64,7 @@ export class TypesTableComponent implements OnInit {
         }
         else {
             // Se activan los inputs para modificar la fila seleccionada
-            this.modifyType.name = row.name;
-            this.modifyType.price = row.price;
-
+            this.modifyType = row;
             this.selectedRow = row.id;
         }
     }
