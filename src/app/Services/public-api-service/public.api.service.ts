@@ -10,7 +10,7 @@ import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class PublicApiService {
-    private apiURL = 'https://delegacion.uc3m.es/...';
+    private apiURL = 'https://delegacion.uc3m.es/taquillas_api/';
 
     constructor(private http:Http) {
       

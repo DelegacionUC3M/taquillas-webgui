@@ -22,6 +22,7 @@ import { PlaceComponent } from './Components/place/place.component';
 import { LockerviewComponent } from './Components/lockerview/lockerview.component';
 import { AuthService } from './Services/auth-service/auth.service';
 import { PublicApiService } from './Services/public-api-service/public.api.service';
+import { ManagerApiService } from './Services/manager-api-service/manager.api.service';
 import { AuthGuard } from './Guards/auth.guard';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TypesTableComponent } from './Components/types-table/types-table.component';
@@ -86,7 +87,7 @@ import { NewPlaceComponent } from './Components/new-place/new-place.component';
         MatDividerModule,
         MatSelectModule
     ],
-    providers: [AuthService, PublicApiService, AuthGuard],
+    providers: [AuthService, PublicApiService, ManagerApiService, AuthGuard],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

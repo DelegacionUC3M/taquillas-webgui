@@ -11,6 +11,8 @@ import {
 import { TypesTableDataSource } from './types-table-datasource';
 import { Type } from '../../Classes/Type';
 import { ConfirmationDialog } from '../../Components/confirmation-dialog/confirmation.dialog.component';
+import { PublicApiService } from '../../Services/public-api-service/public.api.service';
+import { ManagerApiService } from '../../Services/manager-api-service/manager.api.service';
 
 @Component({
     selector: 'types-table',
@@ -29,20 +31,36 @@ export class TypesTableComponent implements OnInit {
     selectedRow: number = null;
     modifyType: Type = new Type;
 
-    constructor(private dialog: MatDialog, public snackBar: MatSnackBar) {
+    constructor(
+        private dialog: MatDialog, 
+        public snackBar: MatSnackBar,
+        private publicApiService: PublicApiService,
+        private managerApi:ManagerApiService
+    ) {
 
     }
 
     ngOnInit() {
-        this.dataSource = new TypesTableDataSource(this.paginator, this.sort);
-
+        this.publicApiService.getTypes().subscribe(
+            result => {
+                this.dataSource = new TypesTableDataSource(result, this.paginator, this.sort);   
+            }
+        ); 
     }
 
     editSave(row: Type): void {
         if (this.selectedRow == row.id) {
             // Guardar la modificacion
+            this.managerApi.modifyType(row.id, this.modifyType.name, this.modifyType.price).subscribe(
+                result => {
+                    this.update();
+                    this.showSnackbar(result.success);  
+                },
+                err => {
+                    this.showSnackbar(err.error);
+                }
+            );
             this.selectedRow = null;
-            console.log(this.modifyType);
         }
         else {
             // Se activan los inputs para modificar la fila seleccionada
@@ -60,21 +78,32 @@ export class TypesTableComponent implements OnInit {
         }
         else {
             // Confirmacion eliminar fila
-            this.openDialog(row);
+            this.openDialog(row);    
         }
     }
 
     update(): void {
-        console.log('Update');
+        this.publicApiService.getTypes().subscribe(
+            result => {
+                this.dataSource.loadData(result); 
+            }
+        );
     }
 
-    openDialog(row: Type): void {
+    openDialog(row: any): void {
         const dialogRef = this.dialog.open(ConfirmationDialog);
 
         dialogRef.afterClosed().subscribe((result: boolean) => {
             if (result) {
-                console.log("Eliminar tipo con id: " + row.id);
-                this.showSnackbar("Eliminado correctamente");
+                this.managerApi.deleteType(row.id).subscribe(
+                    result => {
+                        this.update();
+                        this.showSnackbar(result.success);  
+                    },
+                    err => {
+                        this.showSnackbar(err.error);
+                    }
+                );
             }
         });
     }

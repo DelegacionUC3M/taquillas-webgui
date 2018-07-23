@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { MatInputModule, MatFormFieldModule } from '@angular/material';
+import { ManagerApiService } from '../../Services/manager-api-service/manager.api.service';
 import { TypesTableComponent } from '../types-table/types-table.component';
 import { Type } from '../../Classes/Type';
 
@@ -14,7 +15,7 @@ export class NewTypeComponent implements OnInit {
 
     newTypeObject: Type = new Type;
 
-    constructor() { 
+    constructor(private managerApi:ManagerApiService) { 
 
     }
 
@@ -23,7 +24,15 @@ export class NewTypeComponent implements OnInit {
     }
 
     newType(): void {
-        this.typesTable.update();
+        this.managerApi.newType(this.newTypeObject.name, this.newTypeObject.price).subscribe(
+            result => {
+                this.typesTable.update();
+                this.typesTable.showSnackbar(result.success); 
+            },
+            error => {
+                this.typesTable.showSnackbar(error.error);
+            }
+        );
     }
 
 }
