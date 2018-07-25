@@ -54,13 +54,8 @@ export class PlacesTableComponent implements OnInit {
     editSave(row: Place): void {
         if (this.selectedRow == row.id) {
             // Guardar la modificacion
-            this.managerApi.modifyPlace(
-                row.id, 
-                this.modifyPlace.building, 
-                this.modifyPlace.zone, 
-                this.modifyPlace.floor, 
-                this.modifyPlace.school
-            ).subscribe(
+            this.modifyPlace.id = row.id;
+            this.managerApi.modifyPlace(this.modifyPlace).subscribe(
                 result => {
                     this.update();
                     this.showSnackbar(result.success);  

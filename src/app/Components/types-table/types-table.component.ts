@@ -51,7 +51,8 @@ export class TypesTableComponent implements OnInit {
     editSave(row: Type): void {
         if (this.selectedRow == row.id) {
             // Guardar la modificacion
-            this.managerApi.modifyType(row.id, this.modifyType.name, this.modifyType.price).subscribe(
+            this.modifyType.id = row.id;
+            this.managerApi.modifyType(this.modifyType).subscribe(
                 result => {
                     this.update();
                     this.showSnackbar(result.success);  

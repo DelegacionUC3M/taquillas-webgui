@@ -24,7 +24,7 @@ export class NewPlaceComponent implements OnInit {
     }
 
     newPlace(): void {
-        this.managerApi.newPlace(this.newPlaceObject.building, this.newPlaceObject.zone, this.newPlaceObject.floor, this.newPlaceObject.school).subscribe(
+        this.managerApi.newPlace(this.newPlaceObject).subscribe(
             result => {
                 this.placesTable.update();
                 this.placesTable.showSnackbar(result.success); 

@@ -24,7 +24,7 @@ export class NewTypeComponent implements OnInit {
     }
 
     newType(): void {
-        this.managerApi.newType(this.newTypeObject.name, this.newTypeObject.price).subscribe(
+        this.managerApi.newType(this.newTypeObject).subscribe(
             result => {
                 this.typesTable.update();
                 this.typesTable.showSnackbar(result.success); 

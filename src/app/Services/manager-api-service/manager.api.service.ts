@@ -16,53 +16,52 @@ export class ManagerApiService {
 
     }
 
-    newType(name: string, price: number): Observable<any> {
-        var json = '{"name": "' + name + '", "price": "' + price + '"}';
+    newType(type: Type): Observable<any> {
+        var json = '{"name": "' + type.name + '", "price": "' + type.price + '"}';
         return this.http.post(this.getURL('type'), json, this.getOptions()).map(this.getData).catch(this.error);
     }
 
-    modifyType(id: number, name: string, price: number): Observable<any> {
-        var json = '{"name": "' + name + '", "price": "' + price + '"}';
-        return this.http.put(this.getURL('type/' + id), json, this.getOptions()).map(this.getData).catch(this.error);
+    modifyType(type: Type): Observable<any> {
+        var json = '{"name": "' + type.name + '", "price": "' + type.price + '"}';
+        return this.http.put(this.getURL('type/' + type.id), json, this.getOptions()).map(this.getData).catch(this.error);
     }
 
     deleteType(id: number) {
         return this.http.delete(this.getURL('type/' + id), this.getOptions()).map(this.getData).catch(this.error);
     }
 
-    newPlace(building: string, zone: string, floor:number, school:number): Observable<any> {
-        var json = '{"building": "' + building 
-                    + '", "zone": "' + zone 
-                    + '", "floor": "' + floor 
-                    + '", "school": "' + school + '"}';
+    newPlace(place: Place): Observable<any> {
+        var json = '{"building": "' + place.building 
+                    + '", "zone": "' + place.zone 
+                    + '", "floor": "' + place.floor 
+                    + '", "school": "' + place.school + '"}';
                     console.log(json);
         return this.http.post(this.getURL('place'), json, this.getOptions()).map(this.getData).catch(this.error);
     }
 
-    modifyPlace(id: number, building: string, zone: string, floor:number, school:number): Observable<any> {
-        var json = '{"building": "' + building 
-                    + '", "zone": "' + zone 
-                    + '", "floor": "' + floor 
-                    + '", "school": "' + school +'"}';
-        return this.http.put(this.getURL('place/' + id), json, this.getOptions()).map(this.getData).catch(this.error);
+    modifyPlace(place: Place): Observable<any> {
+        var json = '{"building": "' + place.building 
+                    + '", "zone": "' + place.zone 
+                    + '", "floor": "' + place.floor 
+                    + '", "school": "' + place.school +'"}';
+        return this.http.put(this.getURL('place/' + place.id), json, this.getOptions()).map(this.getData).catch(this.error);
     }
 
     deletePlace(id: number) {
         return this.http.delete(this.getURL('place/' + id), this.getOptions()).map(this.getData).catch(this.error);
     }
 
-    newLocker(number: number, type: number, place:number): Observable<any> {
-        var json = '{"number": "' + number 
-                    + '", "type": "' + type 
-                    + '", "place": "' + place + '"}';
-                    console.log(json);
+    newLocker(locker: Locker): Observable<any> {
+        var json = '{"number": "' + locker.number 
+                    + '", "type": "' + locker.type 
+                    + '", "place": "' + locker.place + '"}';
         return this.http.post(this.getURL('locker'), json, this.getOptions()).map(this.getData).catch(this.error);
     }
 
-    newLockers(number: number, endnumber:number, type: number, place:number): Observable<any> {
-        var json = '{"number": "' + number 
-                    + '", "type": "' + type 
-                    + '", "place": "' + place 
+    newLockers(locker: Locker, endnumber:number): Observable<any> {
+        var json = '{"number": "' + locker.number 
+                    + '", "type": "' + locker.type 
+                    + '", "place": "' + locker.place 
                     + '", "endnumber": "' + endnumber + '"}';
                     console.log(json);
         return this.http.post(this.getURL('locker'), json, this.getOptions()).map(this.getData).catch(this.error);

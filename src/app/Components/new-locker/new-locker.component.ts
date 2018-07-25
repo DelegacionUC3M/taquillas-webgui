@@ -79,7 +79,8 @@ export class NewLockerComponent implements OnInit {
             }
         );
         
-        this.managerApi.newLocker(this.newLockerObject.number, this.newLockerObject.type, newLockerPlace).subscribe(
+        this.newLockerObject.place = newLockerPlace;
+        this.managerApi.newLocker(this.newLockerObject).subscribe(
             result => {
                 this.lockersTable.update();
                 this.lockersTable.showSnackbar(result.success); 
