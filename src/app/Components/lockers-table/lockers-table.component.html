@@ -34,7 +34,12 @@
 
                 <div *ngIf="selectedRow == row.id">
                     <mat-form-field>
-                        <input matInput value="{{modifyLocker.place}}" [(ngModel)]="modifyLocker.place" type="number" required>
+                        <input type="text" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto" >
+                        <mat-autocomplete #auto="matAutocomplete">
+                            <mat-option *ngFor="let place of filteredPlaces | async" [value]="place">
+                                {{place}}
+                            </mat-option>
+                        </mat-autocomplete>
                     </mat-form-field>
                 </div>
             </mat-cell>
@@ -50,7 +55,11 @@
 
                 <div *ngIf="selectedRow == row.id">
                     <mat-form-field>
-                        <input matInput value="{{modifyLocker.type}}" [(ngModel)]="modifyLocker.type" type="number" required>
+                        <mat-select [(value)]="modifyLocker.type" required>
+                            <mat-option *ngFor="let type of typesIterator" [value]="type">
+                                {{types.get(type)}}
+                            </mat-option>
+                        </mat-select>
                     </mat-form-field>
                 </div>
             </mat-cell>
@@ -68,7 +77,11 @@
 
                 <div *ngIf="selectedRow == row.id">
                     <mat-form-field>
-                        <input matInput value="{{modifyLocker.status}}" [(ngModel)]="modifyLocker.status" required>
+                        <mat-select [(value)]="modifyLocker.status" required>
+                            <mat-option [value]="0">Libre</mat-option>
+                            <mat-option [value]="1">Reservada</mat-option>
+                            <mat-option [value]="2">Ocupada</mat-option>
+                        </mat-select>
                     </mat-form-field>
                 </div>
             </mat-cell>
@@ -95,13 +108,27 @@
             <mat-header-cell *matHeaderCellDef mat-sort-header>Incidencia</mat-header-cell>
             <mat-cell *matCellDef="let row">
                 <div *ngIf="selectedRow != row.id">
-                    <div *ngIf="row.status == 0">No</div>
-                    <div *ngIf="row.status == 1">Sí</div>
+                    <div *ngIf="row.incidence == 0">No</div>
+                    <div *ngIf="row.incidence == 1">Sí</div>
+                </div>
+
+                <div *ngIf="selectedRow == row.id">
+                    <mat-checkbox [(ngModel)]= "modifyLocker.incidence"></mat-checkbox>
+                </div>
+            </mat-cell>
+        </ng-container>
+
+        <!-- QR Column -->
+        <ng-container matColumnDef="qr">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>QR</mat-header-cell>
+            <mat-cell *matCellDef="let row">
+                <div *ngIf="selectedRow != row.id">
+                    {{row.qr}}
                 </div>
 
                 <div *ngIf="selectedRow == row.id">
                     <mat-form-field>
-                        <input matInput value="{{modifyLocker.incidence}}" [(ngModel)]="modifyLocker.incidence" required>
+                        <input matInput value="{{modifyLocker.qr}}" [(ngModel)]="modifyLocker.qr">
                     </mat-form-field>
                 </div>
             </mat-cell>

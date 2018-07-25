@@ -14,6 +14,8 @@ import { Locker } from '../../Classes/Locker';
 import { ConfirmationDialog } from '../confirmation-dialog/confirmation.dialog.component';
 import { PublicApiService } from '../../Services/public-api-service/public.api.service';
 import { ManagerApiService } from '../../Services/manager-api-service/manager.api.service';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 
 @Component({
     selector: 'lockers-table',
@@ -26,7 +28,7 @@ export class LockersTableComponent implements OnInit {
     dataSource: LockersTableDataSource;
 
     /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-    displayedColumns = ['id', 'number', 'place', 'type', 'status', 'user', 'incidence', 'edit', 'delete'];
+    displayedColumns = ['id', 'number', 'place', 'type', 'status', 'user', 'incidence', 'qr', 'edit', 'delete'];
 
     selectedRow: number = null;
     modifyLocker: Locker = new Locker;
@@ -36,6 +38,14 @@ export class LockersTableComponent implements OnInit {
 
     typeText = new Map<number, string>();
     placeText = new Map<number, string>();
+
+    myControl = new FormControl();
+    places: string[] = new Array;
+    filteredPlaces: Observable<string[]>;
+    placesTextId = new Map<number, string>();
+
+    types = new Map<number, string>();
+    typesIterator;
 
     constructor(
         private dialog: MatDialog, 
@@ -70,32 +80,65 @@ export class LockersTableComponent implements OnInit {
                         }
                     }
                 );
-                this.dataSource = new LockersTableDataSource(result, this.paginator, this.sort);
-                
+                this.dataSource = new LockersTableDataSource(result, this.paginator, this.sort);  
             }
-        ); 
+        );
+        
+        this.publicApiService.getPlaces().subscribe(
+            result => {
+                for (let place of result) {
+                    this.places.push('Edificio ' + place.building 
+                                        + ', planta ' + place.floor 
+                                        + ', zona ' + place.zone 
+                                        + ' (' + this.schoolName[place.school-1] + ')'
+                                    );
+                    if (!this.placesTextId.has(place.id)){
+                        this.placesTextId.set(place.id, 'Edificio ' + place.building 
+                                                        + ', planta ' + place.floor 
+                                                        + ', zona ' + place.zone 
+                                                        + ' (' + this.schoolName[place.school-1] + ')'
+                                                    );
+                    }
+                }
+                
+                this.filteredPlaces = this.myControl.valueChanges
+                    .pipe(
+                        startWith(''),
+                        map(value => this._filter(value))
+                    );
+            }
+        );
+
+        this.publicApiService.getTypes().subscribe(
+            result => {
+                for (let type of result) {
+                    if (!this.types.has(type.id)){
+                        this.types.set(type.id, type.name);
+                    }
+                }
+                this.typesIterator = Array.from(this.types.keys());
+            }
+        );
     }
 
     editSave(row: Locker): void {
         if (this.selectedRow == row.id) {
+            this.placesTextId.forEach(
+                (place: string, key: number) => {
+                    if (this.myControl.value == place) {
+                        this.modifyLocker.place = key;
+                    }
+                }
+            );
             // Guardar la modificacion
-            this.managerApi.modifyLocker(
-                row.id, 
-                this.modifyLocker.number, 
-                this.modifyLocker.status, 
-                this.modifyLocker.qr, 
-                this.modifyLocker.type,
-                this.modifyLocker.place,
-                this.modifyLocker.incidence,
-                this.modifyLocker.user,
-                this.modifyLocker.date
-            ).subscribe(
+            this.managerApi.modifyLocker(this.modifyLocker).subscribe(
                 result => {
                     this.update();
                     this.showSnackbar(result.success);  
                 },
                 err => {
                     this.showSnackbar(err.error);
+                    this.update();
                 }
             );
             this.selectedRow = null;
@@ -146,6 +189,7 @@ export class LockersTableComponent implements OnInit {
                     },
                     err => {
                         this.showSnackbar(err.error);
+                        this.update();
                     }
                 );
             }
@@ -158,5 +202,10 @@ export class LockersTableComponent implements OnInit {
         config.horizontalPosition = "right";
         config.duration = 3000;
         this.snackBar.open(msg, "OK", config);
+    }
+
+    private _filter(value: string): string[] {
+        const filterValue = value.toLowerCase();
+        return this.places.filter(place => place.toLowerCase().includes(filterValue));
     }
 }

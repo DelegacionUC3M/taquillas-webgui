@@ -68,26 +68,28 @@ export class ManagerApiService {
         return this.http.post(this.getURL('locker'), json, this.getOptions()).map(this.getData).catch(this.error);
     }
 
-    modifyLocker(
-        id: number, 
-        number: number, 
-        status: number, 
-        qr:number, 
-        type:number, 
-        place:number, 
-        incidence:number, 
-        user:number,
-        date:Date
-    ): Observable<any> {
-        var json = '{"number": "' + number 
-                    + '", "status": "' + status 
-                    + '", "qr": "' + qr 
-                    + '", "type": "' + type
-                    + '", "place": "' + place
-                    + '", "incidence": "' + incidence
-                    + '", "user": "' + user
-                    + '", "date": "' + date +'"}';
-        return this.http.put(this.getURL('locker/' + id), json, this.getOptions()).map(this.getData).catch(this.error);
+    modifyLocker(locker: Locker): Observable<any> {
+        var json = '{' ;
+
+        json = '{"number": "' + locker.number 
+                + '", "status": "' + locker.status;
+
+        if (locker.status != 0) {
+                json = json + '", "user": "' + locker.user;
+        }
+        if (locker.qr != null) { 
+                json = json + '", "qr": "' + locker.qr;
+        } 
+        json = json + '", "type": "' + locker.type
+                + '", "place": "' + locker.place;
+        if (locker.incidence) {
+            json = json + '", "incidence": "' + '1';
+        }
+        else {
+            json = json + '", "incidence": "' + '0';
+        }
+        json = json +'"}';
+        return this.http.put(this.getURL('locker/' + locker.id), json, this.getOptions()).map(this.getData).catch(this.error);
     }
 
     deleteLocker(id: number) {

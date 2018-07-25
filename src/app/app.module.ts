@@ -43,7 +43,8 @@ import {
     MatCardModule,
     MatDividerModule,
     MatSelectModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatCheckboxModule
 } from '@angular/material';
 import { NewPlaceComponent } from './Components/new-place/new-place.component';
 
@@ -92,7 +93,8 @@ import { NewPlaceComponent } from './Components/new-place/new-place.component';
         MatCardModule,
         MatDividerModule,
         MatSelectModule,
-        MatAutocompleteModule
+        MatAutocompleteModule,
+        MatCheckboxModule
     ],
     providers: [AuthService, PublicApiService, ManagerApiService, AuthGuard],
     bootstrap: [AppComponent]

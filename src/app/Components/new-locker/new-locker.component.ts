@@ -25,7 +25,6 @@ export class NewLockerComponent implements OnInit {
     myControl = new FormControl();
     places: string[] = new Array;
     filteredPlaces: Observable<string[]>;
-
     placesTextId = new Map<number, string>();
 
     constructor(private managerApi:ManagerApiService, private publicApiService:PublicApiService) { 
@@ -94,5 +93,5 @@ export class NewLockerComponent implements OnInit {
     private _filter(value: string): string[] {
         const filterValue = value.toLowerCase();
         return this.places.filter(place => place.toLowerCase().includes(filterValue));
-      }
+    }
 }
