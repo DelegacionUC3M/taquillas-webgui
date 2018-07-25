@@ -9,30 +9,33 @@ import {
     MatDialog
 } from '@angular/material';
 import { FormControl, Validators } from '@angular/forms';
-import { PlacesTableDataSource } from './places-table-datasource';
-import { Place } from '../../Classes/Place';
+import { LockersTableDataSource } from './lockers-table-datasource';
+import { Locker } from '../../Classes/Locker';
 import { ConfirmationDialog } from '../confirmation-dialog/confirmation.dialog.component';
 import { PublicApiService } from '../../Services/public-api-service/public.api.service';
 import { ManagerApiService } from '../../Services/manager-api-service/manager.api.service';
 
 @Component({
-    selector: 'places-table',
-    templateUrl: './places-table.component.html',
-    styleUrls: ['./places-table.component.css']
+    selector: 'lockers-table',
+    templateUrl: './lockers-table.component.html',
+    styleUrls: ['./lockers-table.component.css']
 })
-export class PlacesTableComponent implements OnInit {
+export class LockersTableComponent implements OnInit {
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
-    dataSource: PlacesTableDataSource;
+    dataSource: LockersTableDataSource;
 
     /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-    displayedColumns = ['id', 'school', 'building', 'floor', 'zone', 'edit', 'delete'];
+    displayedColumns = ['id', 'number', 'place', 'type', 'status', 'user', 'incidence', 'edit', 'delete'];
 
     selectedRow: number = null;
-    modifyPlace: Place = new Place;
+    modifyLocker: Locker = new Locker;
 
     schoolName = ['CCSSJJ', 'Leganés'];
     schoolControl = new FormControl('', [Validators.required]);
+
+    typeText = new Map<number, string>();
+    placeText = new Map<number, string>();
 
     constructor(
         private dialog: MatDialog, 
@@ -44,22 +47,48 @@ export class PlacesTableComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.publicApiService.getPlaces().subscribe(
+        this.managerApi.getLockers().subscribe(
             result => {
-                this.dataSource = new PlacesTableDataSource(result, this.paginator, this.sort);   
+                this.publicApiService.getTypes().subscribe(
+                    result => {
+                        for (let type of result) {
+                            if (!this.typeText.has(type.id)){
+                                this.typeText.set(type.id, type.name);
+                            }
+                        }
+                    }
+                );
+                this.publicApiService.getPlaces().subscribe(
+                    result => {
+                        for (let place of result) {
+                            if (!this.placeText.has(place.id)){
+                                this.placeText.set(place.id, 'Edificio ' + place.building 
+                                                            + ', planta ' + place.floor 
+                                                            + ', zona ' + place.zone 
+                                                            + ' (' + this.schoolName[place.school-1] + ')');
+                            }
+                        }
+                    }
+                );
+                this.dataSource = new LockersTableDataSource(result, this.paginator, this.sort);
+                
             }
         ); 
     }
 
-    editSave(row: Place): void {
+    editSave(row: Locker): void {
         if (this.selectedRow == row.id) {
             // Guardar la modificacion
-            this.managerApi.modifyPlace(
+            this.managerApi.modifyLocker(
                 row.id, 
-                this.modifyPlace.building, 
-                this.modifyPlace.zone, 
-                this.modifyPlace.floor, 
-                this.modifyPlace.school
+                this.modifyLocker.number, 
+                this.modifyLocker.status, 
+                this.modifyLocker.qr, 
+                this.modifyLocker.type,
+                this.modifyLocker.place,
+                this.modifyLocker.incidence,
+                this.modifyLocker.user,
+                this.modifyLocker.date
             ).subscribe(
                 result => {
                     this.update();
@@ -73,12 +102,12 @@ export class PlacesTableComponent implements OnInit {
         }
         else {
             // Se activan los inputs para modificar la fila seleccionada
-            this.modifyPlace = row;
+            this.modifyLocker = row;
             this.selectedRow = row.id;
         }
     }
 
-    deleteCancel(row: Place): void {
+    deleteCancel(row: Locker): void {
         if (this.selectedRow == row.id) {
             // Cancelar la modificacion
             this.selectedRow = null;
@@ -89,20 +118,28 @@ export class PlacesTableComponent implements OnInit {
         }
     }
 
+    getTypeText(type: number) {
+        this.publicApiService.getType(type).subscribe(
+            result => {
+                console.log(result);   
+            }
+        ); 
+    }
+
     update(): void {
-        this.publicApiService.getPlaces().subscribe(
+        this.managerApi.getLockers().subscribe(
             result => {
                 this.dataSource.loadData(result); 
             }
         );
     }
 
-    openDialog(row: Place): void {
+    openDialog(row: Locker): void {
         const dialogRef = this.dialog.open(ConfirmationDialog);
 
         dialogRef.afterClosed().subscribe((result: boolean) => {
             if (result) {
-                this.managerApi.deletePlace(row.id).subscribe(
+                this.managerApi.deleteLocker(row.id).subscribe(
                     result => {
                         this.update();
                         this.showSnackbar(result.success);  

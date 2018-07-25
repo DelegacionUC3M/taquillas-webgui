@@ -51,6 +51,53 @@ export class ManagerApiService {
         return this.http.delete(this.getURL('place/' + id), this.getOptions()).map(this.getData).catch(this.error);
     }
 
+    newLocker(number: number, type: number, place:number): Observable<any> {
+        var json = '{"number": "' + number 
+                    + '", "type": "' + type 
+                    + '", "place": "' + place + '"}';
+                    console.log(json);
+        return this.http.post(this.getURL('locker'), json, this.getOptions()).map(this.getData).catch(this.error);
+    }
+
+    newLockers(number: number, endnumber:number, type: number, place:number): Observable<any> {
+        var json = '{"number": "' + number 
+                    + '", "type": "' + type 
+                    + '", "place": "' + place 
+                    + '", "endnumber": "' + endnumber + '"}';
+                    console.log(json);
+        return this.http.post(this.getURL('locker'), json, this.getOptions()).map(this.getData).catch(this.error);
+    }
+
+    modifyLocker(
+        id: number, 
+        number: number, 
+        status: number, 
+        qr:number, 
+        type:number, 
+        place:number, 
+        incidence:number, 
+        user:number,
+        date:Date
+    ): Observable<any> {
+        var json = '{"number": "' + number 
+                    + '", "status": "' + status 
+                    + '", "qr": "' + qr 
+                    + '", "type": "' + type
+                    + '", "place": "' + place
+                    + '", "incidence": "' + incidence
+                    + '", "user": "' + user
+                    + '", "date": "' + date +'"}';
+        return this.http.put(this.getURL('locker/' + id), json, this.getOptions()).map(this.getData).catch(this.error);
+    }
+
+    deleteLocker(id: number) {
+        return this.http.delete(this.getURL('locker/' + id), this.getOptions()).map(this.getData).catch(this.error);
+    }
+
+    getLockers():Observable<Locker[]> {
+        return this.http.get(this.getURL('locker'), this.getOptions()).map(this.getData).catch(this.error);
+    }
+
     private error(error: any) {
         let err = error.json();
         let msg = (err.error[0]) ? err.error[0] : 'Error desconocido';

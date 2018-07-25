@@ -1,4 +1,11 @@
-#lockerslist ul {
+
+.tittle {
+    width: 80%;
+    margin: 20px auto;
+}
+
+
+/* #lockerslist ul {
   text-align: left;
   margin: 20px auto;
 }
@@ -77,4 +84,4 @@ font-weight: 400;
 
 #btnreserva:hover {
   cursor: pointer;
-}
+} */

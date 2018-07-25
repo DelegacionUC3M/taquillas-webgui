@@ -10,7 +10,7 @@ import {
 } from '@angular/material';
 import { TypesTableDataSource } from './types-table-datasource';
 import { Type } from '../../Classes/Type';
-import { ConfirmationDialog } from '../../Components/confirmation-dialog/confirmation.dialog.component';
+import { ConfirmationDialog } from '../confirmation-dialog/confirmation.dialog.component';
 import { PublicApiService } from '../../Services/public-api-service/public.api.service';
 import { ManagerApiService } from '../../Services/manager-api-service/manager.api.service';
 

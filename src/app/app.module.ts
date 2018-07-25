@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 import { AppComponent } from './app.component';
@@ -27,7 +27,9 @@ import { AuthGuard } from './Guards/auth.guard';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TypesTableComponent } from './Components/types-table/types-table.component';
 import { NewTypeComponent } from './Components/new-type/new-type.component';
+import { NewLockerComponent } from './Components/new-locker/new-locker.component';
 import { PlacesTableComponent } from './Components/places-table/places-table.component';
+import { LockersTableComponent } from './Components/lockers-table/lockers-table.component';
 import { ConfirmationDialog } from './Components/confirmation-dialog/confirmation.dialog.component';
 import {
     MatTableModule, 
@@ -40,7 +42,8 @@ import {
     MatSnackBarModule,
     MatCardModule,
     MatDividerModule,
-    MatSelectModule
+    MatSelectModule,
+    MatAutocompleteModule
 } from '@angular/material';
 import { NewPlaceComponent } from './Components/new-place/new-place.component';
 
@@ -63,15 +66,18 @@ import { NewPlaceComponent } from './Components/new-place/new-place.component';
         LockerviewComponent,
         TypesTableComponent,
         PlacesTableComponent,
+        LockersTableComponent,
         ConfirmationDialog,
         NewTypeComponent,
-        NewPlaceComponent
+        NewPlaceComponent,
+        NewLockerComponent
     ],
     entryComponents: [ConfirmationDialog],
     imports: [
         BrowserModule,
         HttpClientModule,
         FormsModule,
+        ReactiveFormsModule,
         HttpModule,
         AppRouting,
         BrowserAnimationsModule,
@@ -85,7 +91,8 @@ import { NewPlaceComponent } from './Components/new-place/new-place.component';
         MatSnackBarModule,
         MatCardModule,
         MatDividerModule,
-        MatSelectModule
+        MatSelectModule,
+        MatAutocompleteModule
     ],
     providers: [AuthService, PublicApiService, ManagerApiService, AuthGuard],
     bootstrap: [AppComponent]
