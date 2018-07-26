@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, Request, RequestOptions, Response } from '@angular/http';
+import { Http, Headers, URLSearchParams, RequestOptions, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { Locker } from '../../Classes/Locker';
 import { Place } from '../../Classes/Place';
@@ -95,7 +95,11 @@ export class ManagerApiService {
         return this.http.delete(this.getURL('locker/' + id), this.getOptions()).map(this.getData).catch(this.error);
     }
 
-    getLockers():Observable<Locker[]> {
+    getLockers(filters?: Map<string, string>):Observable<Locker[]> {
+        if (filters != null) {
+            return this.http.get(this.getURL('locker'), this.getOptions(filters)).map(this.getData).catch(this.error);
+        }
+        
         return this.http.get(this.getURL('locker'), this.getOptions()).map(this.getData).catch(this.error);
     }
 
@@ -114,12 +118,23 @@ export class ManagerApiService {
         return this.apiURL + endPoint;
     }
 
-    private getOptions(): RequestOptions {
+    private getOptions(filters?: Map<string, string>): RequestOptions {
         let token = (sessionStorage.getItem('token')) ? sessionStorage.getItem('token') : 'falta token';
         let headers = new Headers();
         headers.append("Authorization", "Bearer " + token);
-        headers.append("Content-Type", "application/json")
-        let options = new RequestOptions({ headers: headers });
+        headers.append("Content-Type", "application/json");
+        let options;
+
+        if (filters != null) {
+            let params = new URLSearchParams();
+            filters.forEach((value: string, key: string) => {
+                params.append(key, value);
+            });
+            options = new RequestOptions({ headers: headers, params:params });
+        }
+        else {
+            options = new RequestOptions({ headers: headers });
+        }
         return options;
     }
 }

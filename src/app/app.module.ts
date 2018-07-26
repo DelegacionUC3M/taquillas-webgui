@@ -1,8 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
-
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './Components/header/header.component';
 import { FooterComponent } from './Components/footer/footer.component';
@@ -11,26 +9,35 @@ import { AppRouting } from './Routes/app.routing';
 import { CondicionesComponent } from './Components/condiciones/condiciones.component';
 import { LockerComponent } from './Components/locker/locker.component';
 import { AdminhomeComponent } from './Components/adminhome/adminhome.component';
-import { ManagerhomeComponent } from './Components/managerhome/managerhome.component';
 import { LockerselectorComponent } from './Components/lockerselector/lockerselector.component';
-import { ManagerlockerlistComponent } from './Components/managerlockerlist/managerlockerlist.component';
 import { LockerformComponent } from './Components/lockerform/lockerform.component';
-import { HttpModule, JsonpModule } from '@angular/http';
+import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
-import { TypeComponent } from './Components/type/type.component';
-import { PlaceComponent } from './Components/place/place.component';
 import { LockerviewComponent } from './Components/lockerview/lockerview.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+
+
+
+import { ManagerComponent } from './Components/manager/manager.component';
+import { ManagerLockerComponent } from './Components/manager-locker/manager-locker.component';
+import { ManagerPlaceComponent } from './Components/manager-place/manager-place.component';
+import { ManagerTypeComponent } from './Components/manager-type/manager-type.component';
+import { ManagerNewLockerComponent } from './Components/manager-new-locker/manager-new-locker.component';
+import { ManagerNewPlaceComponent } from './Components/manager-new-place/manager-new-place.component';
+import { ManagerNewTypeComponent } from './Components/manager-new-type/manager-new-type.component';
+import { ManagerTableLockersComponent } from './Components/manager-table-lockers/manager-table-lockers.component';
+import { ManagerTablePlacesComponent } from './Components/manager-table-places/manager-table-places.component';
+import { ManagerTableTypesComponent } from './Components/manager-table-types/manager-table-types.component';
+
+import { ConfirmationDialog } from './Components/confirmation-dialog/confirmation.dialog.component';
+
 import { AuthService } from './Services/auth-service/auth.service';
 import { PublicApiService } from './Services/public-api-service/public.api.service';
 import { ManagerApiService } from './Services/manager-api-service/manager.api.service';
+
 import { AuthGuard } from './Guards/auth.guard';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { TypesTableComponent } from './Components/types-table/types-table.component';
-import { NewTypeComponent } from './Components/new-type/new-type.component';
-import { NewLockerComponent } from './Components/new-locker/new-locker.component';
-import { PlacesTableComponent } from './Components/places-table/places-table.component';
-import { LockersTableComponent } from './Components/lockers-table/lockers-table.component';
-import { ConfirmationDialog } from './Components/confirmation-dialog/confirmation.dialog.component';
+
 import {
     MatTableModule, 
     MatPaginatorModule, 
@@ -44,9 +51,9 @@ import {
     MatDividerModule,
     MatSelectModule,
     MatAutocompleteModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatTabsModule
 } from '@angular/material';
-import { NewPlaceComponent } from './Components/new-place/new-place.component';
 
 
 @NgModule({
@@ -58,22 +65,27 @@ import { NewPlaceComponent } from './Components/new-place/new-place.component';
         CondicionesComponent,
         LockerComponent,
         AdminhomeComponent,
-        ManagerhomeComponent,
         LockerselectorComponent,
-        ManagerlockerlistComponent,
         LockerformComponent,
-        TypeComponent,
-        PlaceComponent,
+        
         LockerviewComponent,
-        TypesTableComponent,
-        PlacesTableComponent,
-        LockersTableComponent,
-        ConfirmationDialog,
-        NewTypeComponent,
-        NewPlaceComponent,
-        NewLockerComponent
+    
+        ManagerComponent,
+        ManagerLockerComponent,
+        ManagerPlaceComponent,
+        ManagerTypeComponent,
+        ManagerNewLockerComponent,
+        ManagerNewPlaceComponent,
+        ManagerNewTypeComponent,
+        ManagerTableLockersComponent,
+        ManagerTablePlacesComponent,
+        ManagerTableTypesComponent,
+
+        ConfirmationDialog
     ],
-    entryComponents: [ConfirmationDialog],
+
+    entryComponents: [ ConfirmationDialog ],
+
     imports: [
         BrowserModule,
         HttpClientModule,
@@ -94,9 +106,12 @@ import { NewPlaceComponent } from './Components/new-place/new-place.component';
         MatDividerModule,
         MatSelectModule,
         MatAutocompleteModule,
-        MatCheckboxModule
+        MatCheckboxModule,
+        MatTabsModule
     ],
-    providers: [AuthService, PublicApiService, ManagerApiService, AuthGuard],
-    bootstrap: [AppComponent]
+
+    providers: [ AuthService, PublicApiService, ManagerApiService, AuthGuard ],
+
+    bootstrap: [ AppComponent ]
 })
 export class AppModule { }

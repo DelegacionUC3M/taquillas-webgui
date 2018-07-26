@@ -1,0 +1,14 @@
+@import '~@angular/material/theming';
+
+// define 3 theme color
+// mat-palette accepts $palette-name, main, lighter and darker variants
+$dele-theme-primary: mat-palette($mat-indigo, 700, 300, 900);
+$dele-theme-accent: mat-palette($mat-light-blue);
+$dele-theme-warn: mat-palette($mat-deep-orange, A200);
+
+// create theme (use mat-dark-theme for themes with dark backgrounds)
+$dele-theme: mat-light-theme(
+    $dele-theme-primary,
+    $dele-theme-accent,
+    $dele-theme-warn
+);

@@ -1,0 +1,60 @@
+/* Application-wide styles */
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500,700);
+
+@import '~@angular/material/theming';
+
+// always include only once per project
+@include mat-core();
+
+// import our custom theme
+@import 'dele-theme.scss';
+
+// specify theme class eg: <body class="my-theme"> ... </body>
+.dele-theme {
+  
+  // use our theme with angular-material-theme mixin
+  @include angular-material-theme($dele-theme);
+}
+
+content{
+    overflow: scroll;
+}
+
+html {
+    font-family: 'Roboto', sans-serif;
+    font-size: 100%;
+    background: #e1e1e1;
+    height: 100%;
+}
+
+a {
+    text-decoration: none;
+    outline: none;
+    color: #066394;
+}
+
+h1, h2 {
+    font-weight: 300;
+}
+
+body {
+    margin: 0;
+    background: #e1e1e1;
+}
+
+.hdft {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 6px 0;
+}
+
+.clear::after{
+    display: block;
+    clear: both;
+    overflow: hidden;
+}
+
+body{ 
+    margin: 0; 
+}
+
